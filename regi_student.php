@@ -44,6 +44,32 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="./Styles/regi_student.css">
 </head>
 <body>
+    <!-- ヘッダー部分 -->
+    <header>
+        <div class="header-content">
+            <h1><div class="header-title">ECCコンピュータ専門学校</div></h1>
+            <div class="drawer">
+                <!-- ハンバーガーメニューの表示・非表示を切り替えるチェックボックス -->
+                <input type="checkbox" id="drawer-check" class="drawer-hidden">
+                <!-- ハンバーガーアイコン -->
+                <label for="drawer-check" class="drawer-open"><span></span></label>
+                <!-- メニュー -->
+                <nav class="drawer-content">
+                    <ul class="drawer-list">
+                        <li class="drawer-item">
+                            <a href="./attendance_check.php">出席確認</a>
+                        </li>
+                        <li class="drawer-item">
+                            <a href="./selectQR.php">QRコード表示</a>
+                        </li>
+                        <li class="drawer-item">
+                            <a href="./login.php" name="logout">ログアウト</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
     <h1>生徒アカウント作成</h1>
     <form action="./regi_student.php" method="POST" enctype="multipart/form-data">
         <label for="student_name">名前</label>
@@ -58,6 +84,5 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">登録</button>
         </div>
     </form>
-    <button onclick="location.href='./home.php'">ホーム画面へ戻る</button>
 </body>
 </html>

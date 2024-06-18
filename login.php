@@ -6,6 +6,7 @@ $host = 'localhost';
 $dbname = 'teamb';
 $username = 'test';
 $password = 'test';
+unset($_SESSION['teacher_no']);
 
 if(isset($_POST['teacher_no'])) {
     // DB接続
@@ -20,7 +21,7 @@ if(isset($_POST['teacher_no'])) {
     $pass = $row['PASS'];
     if($pass == $_POST['password']){
         $_SESSION['teacher_no'] = $_POST['teacher_no'];
-        header("Location: ./home.php");
+        header("Location: ./attendance_check.php");
         exit();
     }
     $conn->close();

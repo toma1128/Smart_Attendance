@@ -30,6 +30,7 @@ if(isset($_POST['stu_no'])) {
 
 </head>
 <body>
+  <h1>出席登録</h1>
   <form action="./form_student.php" method="post">
     <label for="stu_no">学籍番号</label>
     <input type="text" id="stu_no" name="stu_no" placeholder="例:0000" required>
@@ -39,4 +40,3 @@ if(isset($_POST['stu_no'])) {
   </form>
 </body>
 </html>
-

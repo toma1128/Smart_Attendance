@@ -7,13 +7,6 @@ if(!isset($_SESSION['teacher_no'])) {
   exit();
 }
 
-// ログアウトボタンが押された時の処理
-if(isset($_POST['logout'])) {
-  unset($_SESSION['teacher_no']);
-  header("Location: ./login.php");
-  exit();
-}
-
 //データベース接続定義
 $host = 'localhost';
 $dbname = 'teamb';
@@ -47,29 +40,49 @@ $conn->close(); //接続切断
     <link rel="stylesheet" href="./Styles/attendance_check.css">
 </head>
 <body>
-    <h1>出席確認</h1>
-    <button onclick="location.href='./home.php'">ホーム画面へ戻る</button>
-    <form action="./home.php" method="post">
-      <button name="logout">ログアウト</button>
-    </form>
-    <table>
-      <tr>
-        <th>学籍番号</th>
-        <th>名前</th>
-        <th>クラス</th>
-        <th>カメラ出席</th>
-        <th>QRコード出席</th>
-      </tr>
-      <?php foreach ($result as $row) : ?>
-      <tr>
-        <td><?= $row['STUDENT'] ?></td>
-        <td><?= $row['NAME'] ?></td>
-        <td><?= $row['CLASS'] ?></td>
-        <td><?= $attendance[$row['CAMERA']-1] ?></td>
-        <td><?= $attendance[$row['QR']-1] ?></td>
-      </tr>
-      <?php endforeach ?>
-    </table>
+  <header>
+    <div class="drawer">
+      <!-- ハンバーガーメニューの表示・非表示を切り替えるチェックボックス -->
+      <input type="checkbox" id="drawer-check" class="drawer-hidden">
+
+      <!-- ハンバーガーアイコン -->
+      <label for="drawer-check" class="drawer-open"><span></span></label>
+
+      <!-- メニュー -->
+      <nav class="drawer-content">
+        <ul class="drawer-list">
+          <li class="drawer-item">
+            <a href="./regi_student.php">生徒登録</a>
+          </li><!-- /.drawer-item -->
+          <li class="drawer-item">
+            <a href="./selectQR.php">QRコード表示</a>
+          </li><!-- /.drawer-item -->
+          <li class="drawer-item">
+            <a href="./login.php" name="logout">ログアウト</a>
+          </li>
+        </ul><!-- /.drawer-list -->
+      </nav>
+    </div>
+  </header>
+  <h1>出席確認</h1>
+  <table>
+    <tr>
+      <th>学籍番号</th>
+      <th>名前</th>
+      <th>クラス</th>
+      <th>カメラ出席</th>
+      <th>QRコード出席</th>
+    </tr>
+    <?php foreach ($result as $row) : ?>
+    <tr>
+      <td><?= $row['STUDENT'] ?></td>
+      <td><?= $row['NAME'] ?></td>
+      <td><?= $row['CLASS'] ?></td>
+      <td><?= $attendance[$row['CAMERA']-1] ?></td>
+      <td><?= $attendance[$row['QR']-1] ?></td>
+    </tr>
+    <?php endforeach ?>
+  </table>
 </body>
 </html>
 

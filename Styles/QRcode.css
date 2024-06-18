@@ -6,9 +6,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-header {
+  }
+  
+  header {
     width: 100%;
     padding: 10px;
     background-color: #fff;
@@ -16,69 +16,69 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.header-content {
+  }
+  
+  .header-content {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.header-title {
+  }
+  
+  .header-title {
     font-size: 18px;
-    color: rgb(18, 160, 220);
-}
-
-main {
+    color:rgb(18, 160, 220);;
+  }
+  
+  main {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-grow: 1;
     padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
-}
-
-h1 {
+  }
+  
+  h1 {
     text-align: center;
     color: rgb(18, 184, 240);
-}
-
-form {
+  }
+  
+  form {
     max-width: 400px;
     width: 100%;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
+  }
+  
+  label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-}
-
-input[type="text"],
-input[type="file"],
-select {
+  }
+  
+  input[type="text"],
+  input[type="file"],
+  select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
-}
-
-input[type="file"] {
+  }
+  
+  input[type="file"] {
     padding: 5px;
-}
-
-#button {
+  }
+  
+  #button {
     text-align: center;
-}
-
-button {
+  }
+  
+  button {
     background-color: rgb(18, 184, 240);
     color: #fff;
     padding: 10px 20px;
@@ -86,55 +86,55 @@ button {
     border-radius: 3px;
     cursor: pointer;
     font-size: 16px;
-}
-
-button:hover {
+  }
+  
+  button:hover {
     background-color: rgb(18, 160, 220);
-}
-
-.drawer {
+  }
+  
+  .drawer {
     position: relative;
-}
-
-.drawer-hidden {
+  }
+  
+  .drawer-hidden {
     display: none;
-}
-
-.drawer-open {
+  }
+  
+  .drawer-open {
     display: block;
     width: 30px;
     height: 30px;
     position: relative;
     cursor: pointer;
-}
-
-.drawer-open span,
-.drawer-open span::before,
-.drawer-open span::after {
+  }
+  
+  .drawer-open span,
+  .drawer-open span::before,
+  .drawer-open span::after {
     display: block;
     width: 100%;
     height: 4px;
     background-color: #333;
     position: absolute;
     transition: all 0.3s ease-in-out;
-}
-
-.drawer-open span {
+  }
+  
+  .drawer-open span {
     top: 50%;
     transform: translateY(-50%);
-}
-
-.drawer-open span::before {
+  }
+  
+  .drawer-open span::before {
     content: '';
     top: -10px;
-}
-
-.drawer-open span::after {
+  }
+  
+  .drawer-open span::after {
     content: '';
     bottom: -10px;
-}
-
-.drawer-content {
+  }
+  
+  .drawer-content {
     position: absolute;
     top: 40px;
     right: 0;  /* メニューを右に配置 */
@@ -144,33 +144,34 @@ button:hover {
     border-radius: 4px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     display: none;
-}
-
-.drawer-list {
+  }
+  
+  .drawer-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
-
-.drawer-item {
+  }
+  
+  .drawer-item {
     border-bottom: 1px solid #ddd;
-}
-
-.drawer-item:last-child {
+  }
+  
+  .drawer-item:last-child {
     border-bottom: none;
-}
-
-.drawer-item a {
+  }
+  
+  .drawer-item a {
     display: block;
     padding: 10px 15px;
     text-decoration: none;
     color: #333;
-}
-
-.drawer-item a:hover {
+  }
+  
+  .drawer-item a:hover {
     background-color: #f0f0f0;
-}
-
-#drawer-check:checked ~ .drawer-content {
+  }
+  
+  #drawer-check:checked ~ .drawer-content {
     display: block;
-}
+  }
+  
