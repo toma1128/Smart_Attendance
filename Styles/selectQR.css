@@ -1,176 +1,180 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  padding: 20px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-family: Arial, sans-serif; /* ページ全体のフォントをArialに設定 */
+  background-color: #f2f2f2; /* ページの背景色を薄いグレーに */
+  padding: 20px; /* ページ全体に20pxのパディング追加 */
+  margin: 0; /* ページの外側の余白をゼロに */
+  display: flex; /* フレックスボックスレイアウト使用 */
+  flex-direction: column; /* 子要素を縦方向に配置 */
+  align-items: center; /* 子要素を中央揃えに */
 }
 
 header {
-  width: 100%;
-  padding: 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%; /* ヘッダーの幅をページ全体に広る */
+  padding: 10px; /* ヘッダーに10pxの内側余白を追加 */
+  background-color: #fff; /* ヘッダーの背景色を白に設定 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ヘッダーに薄い影を追加*/
+  display: flex; /* フレックスボックスレイアウトを使用 */
+  justify-content: center; /* ヘッダー内の要素を中央に配置 */
+  align-items: center; /* ヘッダー内の要素を縦方向に中央揃え */
 }
 
 .header-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%; /* ヘッダーコンテンツの幅をページ全体に広げる */
+  display: flex; /* フレックスボックスレイアウトを使用 */
+  justify-content: space-between; /* ヘッダーコンテンツ内の要素を左右に配置 */
+  align-items: center; /* ヘッダーコンテンツ内の要素を縦方向に中央揃え */
 }
 
 .header-title {
-  font-size: 18px;
-  color:rgb(18, 160, 220);;
+  font-size: 18px; /* ヘッダーのタイトルのフォントサイズを18pxに設定 */
+  color: rgb(18, 160, 220);
 }
 
 main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
+  width: 100%; /* メインコンテンツの幅をページ全体に広る */
+  display: flex; /* フレックスボックスレイアウトを使用 */
+  justify-content: center; /* メインコンテンツ内の要素を中央に配置 */
+  align-items: center; /* メインコンテンツ内の要素を縦方向に中央揃え */
+  flex-grow: 1; /* メインコンテンツが余ったスペースを占めるように */
+  padding-top: 50px; /* ヘッダーとフォームの間にスペースを追加 */
 }
 
 h1 {
-  text-align: center;
-  color: rgb(18, 184, 240);
+  text-align: center; /* 見出しを中央揃え */
+  color: rgb(18, 184, 240); /* 見出しの色を青色に設定 */
 }
 
 form {
-  max-width: 400px;
-  width: 100%;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px; /* フォームの最大幅を400pxに設定 */
+  width: 100%; /* フォームの幅をページ全体に広げる */
+  background-color: #fff; /* フォームの背景色を白に設定 */
+  padding: 20px; /* フォームに20pxの内側余白を追加 */
+  border-radius: 5px; /* フォームの角を5pxの半径で丸める */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* フォームに薄い影を追加 */
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  display: block; /* ラベルをブロックレベル要素に */
+  margin-bottom: 5px; /* ラベルの下に5pxのマージンを追加 */
+  font-weight: bold; /* ラベルのフォントを太字に */
 }
 
 input[type="text"],
 input[type="file"],
 select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
+  width: 100%; /* フォーム要素の幅を100%に設定 */
+  padding: 30px; /* フォーム要素に30pxの内側余白を追加 */
+  margin-bottom: 15px; /* フォーム要素の下に15pxのマージンを追加 */
+  border: 1px solid #ccc; /* フォーム要素の境界線を薄いグレーに設定 */
+  border-radius: 3px; /* フォーム要素の角を3pxの半径で丸める */
+  box-sizing: border-box; /* パディングとボーダーを含めた全体の幅を設定 */
+}
+
+select option {
+  font-size: 20px; /* ここで文字サイズを大きく設定 */
 }
 
 input[type="file"] {
-  padding: 5px;
+  padding: 5px; /* ファイル入力要素に5pxの内側余白を追加 */
 }
 
 #button {
-  text-align: center;
+  text-align: center; /* ボタンのテキストを中央揃えに */
 }
 
 button {
-  background-color: rgb(18, 184, 240);
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 16px;
+  background-color: rgb(18, 184, 240); /* ボタンの背景色を青色に設定 */
+  color: #fff; /* ボタンのテキスト色を白に設定 */
+  padding: 10px 20px; /* ボタンに10pxの上下パディングと20pxの左右パディングを追加 */
+  border: none; /* ボタンの境界線をなしに */
+  border-radius: 3px; /* ボタンの角を3pxの半径で丸める */
+  cursor: pointer; /* ボタンにポインターカーソルを設定 */
+  font-size: 16px; /* ボタンのフォントサイズを16pxに設定 */
 }
 
 button:hover {
-  background-color: rgb(18, 160, 220);
+  background-color: rgb(18, 160, 220); /* ボタンにホバー時の背景色を青色に設定 */
 }
 
 .drawer {
-  position: relative;
+  position: relative; /* ドロワーメニューを相対位置に設定*/
 }
 
 .drawer-hidden {
-  display: none;
+  display: none; /* 非表示のドロワーメニューを設定 */
 }
 
 .drawer-open {
-  display: block;
-  width: 30px;
-  height: 30px;
-  position: relative;
-  cursor: pointer;
+  display: block; /* ドロワーメニューを表示 */
+  width: 30px; /* ドロワーメニューの幅を30pxに設定 */
+  height: 30px; /* ドロワーメニューの高さを30pxに設定 */
+  position: relative; /* ドロワーメニューを相対位置に設定 */
+  cursor: pointer; /* ドロワーメニューにポインターカーソルを設定 */
 }
 
 .drawer-open span,
 .drawer-open span::before,
 .drawer-open span::after {
-  display: block;
-  width: 100%;
-  height: 4px;
-  background-color: #333;
-  position: absolute;
-  transition: all 0.3s ease-in-out;
+  display: block; /* ドロワーメニューのスパン要素と疑似要素をブロック表示に設定 */
+  width: 100%; /* ドロワーメニューのスパン要素と疑似要素の幅を100%に設定 */
+  height: 4px; /* ドロワーメニューのスパン要素と疑似要素の高さを4pxに設定 */
+  background-color: #333; /* ドロワーメニューのスパン要素と疑似要素の背景色を濃いグレーに設定 */
+  position: absolute; /* ドロワーメニューのスパン要素と疑似要素を絶対位置に設定 */
+  transition: all 0.3s ease-in-out; /* ドロワーメニューのスパン要素と疑似要素のトランジションを設定 */
 }
 
 .drawer-open span {
-  top: 50%;
-  transform: translateY(-50%);
+  top: 50%; /* スパン要素の上位置を50%に設定*/
+  transform: translateY(-50%); /* スパン要素のY軸方向の変換を設定 */
 }
 
 .drawer-open span::before {
-  content: '';
-  top: -10px;
+  content: ''; /* 疑似要素の内容を空に設定*/
+  top: -10px; /* 疑似要素の上位置を-10pxに設定 */
 }
 
 .drawer-open span::after {
-  content: '';
-  bottom: -10px;
+  content: ''; /* 疑似要素の内容を空に設定 */
+  bottom: -10px; /* 疑似要素の下位置を-10pxに設定 */
 }
 
 .drawer-content {
-  position: absolute;
-  top: 40px;
-  right: 0;  /* メニューを右に配置 */
-  background-color: #fff;
-  width: 200px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  display: none;
+  position: absolute; /* ドロワーメニューの内容を絶対位置に設定 */
+  top: 40px; /* ドロワーメニューの内容の上位置を40pxに設定 */
+  right: 0; /* ドロワーメニューの内容を右に配置 */
+  background-color: #fff; /* ドロワーメニューの内容の背景色を白に設定 */
+  width: 200px; /* ドロワーメニューの内容の幅を200pxに設定 */
+  border: 1px solid #ddd; /* ドロワーメニューの内容の境界線を薄いグレーに設定 */
+  border-radius: 4px; /* ドロワーメニューの内容の角を4pxの半径で丸める */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* ドロワーメニューの内容に薄い影を追加 */
+  display: none; /* ドロワーメニューの内容を非表示に設定 */
 }
 
 .drawer-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  list-style-type: none; /* リストのスタイルをなしに */
+  margin: 0; /* リストのマージンをゼロに設定 */
+  padding: 0; /* リストのパディングをゼロに設定 */
 }
 
 .drawer-item {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; /* リストアイテムの下に薄いグレーの境界線を設定 */
 }
 
 .drawer-item:last-child {
-  border-bottom: none;
+  border-bottom: none; /* 最後のリストアイテムの下の境界線をなしに設定 */
 }
 
 .drawer-item a {
-  display: block;
-  padding: 10px 15px;
-  text-decoration: none;
-  color: #333;
+  display: block; /* リンクをブロックレベル要素に設定 */
+  padding: 10px 15px; /* リンクに10pxの上下パディングと15pxの左右パディングを追加 */
+  text-decoration: none; /* リンクの下線をなしに設定 */
+  color: #333; /* リンクの色を濃いグレーに設定 */
 }
 
 .drawer-item a:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; /* リンクにホバー時の背景色を薄いグレーに設定 */
 }
 
 #drawer-check:checked ~ .drawer-content {
-  display: block;
+  display: block; /* チェックボックスがチェックされたときにドロワーメニューの内容を表示 */
 }
