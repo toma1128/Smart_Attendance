@@ -5,19 +5,40 @@ $dbname = 'teamb';
 $username = 'test';
 $password = 'test';
 
+if(isset($_GET['id'])){
+  $subject = $_GET['id'];  //授業ID取得
+}
+
 if(isset($_POST['stu_no'])) {
   // DB接続
   $conn = new mysqli($host, $username, $password, $dbname);
-  $sql = "SELECT STUDENT_NO FROM STUDENT WHERE STUDENT_NO = ?";
-  $stmt = $conn->prepare($sql);
+
+  $getID = "SELECT MAX(HEADER_NO) FROM ATTENDANCEHEADER;";
+  $result = $conn->query($getID);
+  $row = $result->fetch_row();
+  $header_no = $row[0] + 1;
+
+  // 学籍番号存在確認
+  $get_stuNo = "SELECT * FROM STUDENT WHERE STUDENT_NO = ?";
+  $stmt = $conn->prepare($get_stuNo);
   $stmt->bind_param('i', $_POST['stu_no']);
   $stmt->execute();
-  // if($result = $stmt->get_result()) {
-  //   $row = $result->fetch_assoc();
-  //   $class_no = $row['CLASS_NO'];
-  //   $sql = "UPDATE STUDENT SET ATTEND = 1 WHERE STUDENT_NO = ?";
-  // }
+  if($result = $stmt->get_result()) {
+    $row = $result->fetch_assoc();
+    $class_no = $row['CLASS'];
+
+    $exist = "SELECT * from ATTENDANCEDETAIL WHERE HEADER_NO = ? AND STUDENT = ?";
+    $stmt = $conn->prepare($exist);
+    $stmt->bind_param('ii', $header_no, $_POST['stu_no']);
+    $stmt->execute();
+    
+    $msg = "出席登録しました。";
+  }else{
+    $msg = "学籍番号が存在しません。";
+  }
   $conn->close();
+
+  echo "<script>alert('".$msg."')</script>";
 }
 
 ?>

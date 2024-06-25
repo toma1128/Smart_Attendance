@@ -1,177 +1,198 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    padding: 20px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
   
-  header {
-    width: 100%;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .header-content {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .header-title {
-    font-size: 18px;
-    color:rgb(18, 160, 220);;
-  }
-  
-  main {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
-  }
-  
-  h1 {
-    text-align: center;
-    color: rgb(18, 184, 240);
-  }
-  
-  form {
-    max-width: 400px;
-    width: 100%;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  input[type="text"],
-  input[type="file"],
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-  }
-  
-  input[type="file"] {
-    padding: 5px;
-  }
-  
-  #button {
-    text-align: center;
-  }
-  
-  button {
-    background-color: rgb(18, 184, 240);
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: rgb(18, 160, 220);
-  }
-  
-  .drawer {
-    position: relative;
-  }
-  
-  .drawer-hidden {
-    display: none;
-  }
-  
-  .drawer-open {
-    display: block;
-    width: 30px;
-    height: 30px;
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .drawer-open span,
-  .drawer-open span::before,
-  .drawer-open span::after {
-    display: block;
-    width: 100%;
-    height: 4px;
-    background-color: #333;
-    position: absolute;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .drawer-open span {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .drawer-open span::before {
-    content: '';
-    top: -10px;
-  }
-  
-  .drawer-open span::after {
-    content: '';
-    bottom: -10px;
-  }
-  
-  .drawer-content {
-    position: absolute;
-    top: 40px;
-    right: 0;  /* メニューを右に配置 */
-    background-color: #fff;
-    width: 200px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    display: none;
-  }
-  
-  .drawer-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .drawer-item {
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .drawer-item:last-child {
-    border-bottom: none;
-  }
-  
-  .drawer-item a {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .drawer-item a:hover {
-    background-color: #f0f0f0;
-  }
-  
-  #drawer-check:checked ~ .drawer-content {
-    display: block;
-  }
-  
+header {
+  width: 98%;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 18px;
+  color:rgb(18, 160, 220);
+  text-align: left;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
+}
+
+h1 {
+  text-align: center;
+  color: rgb(18, 184, 240);
+}
+
+h3 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+form {
+  max-width: 400px;
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+input[type="file"] {
+  padding: 5px;
+}
+
+#button {
+  text-align: center;
+}
+
+button {
+  background-color: rgb(18, 184, 240);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: rgb(18, 160, 220);
+}
+
+.drawer {
+  position: relative;
+}
+
+.drawer-hidden {
+  display: none;
+}
+
+.drawer-open {
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+.drawer-open span,
+.drawer-open span::before,
+.drawer-open span::after {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #333;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+}
+
+.drawer-open span {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.drawer-open span::before {
+  content: '';
+  top: -10px;
+}
+
+.drawer-open span::after {
+  content: '';
+  bottom: -10px;
+}
+
+.drawer-content {
+  position: absolute;
+  top: 40px;
+  right: 0;  /* メニューを右に配置 */
+  background-color: #fff;
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.drawer-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.drawer-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.drawer-item:last-child {
+  border-bottom: none;
+}
+
+.drawer-item a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+.drawer-item a:hover {
+  background-color: #f0f0f0;
+}
+
+#drawer-check:checked ~ .drawer-content {
+  display: block;
+}
+
+#QRcode {
+  background-color: #fff;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#QRcode img {
+  width: 600px;
+  height: auto;
+  display: block;
+}

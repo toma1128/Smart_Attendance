@@ -59,7 +59,7 @@ $i = 1;
         </header>
         <main>
             <form action="./QRcode.php" method="post">
-                <select name="QR_ID">
+                <select name="QR_ID" id="lang" size="4">
                     <?php foreach ($result as $row) : ?>
                     <option value="<?= $i ?>"><?php echo $row['SNAME']; ?></option>
                     <?php $i++; endforeach ?>
