@@ -27,7 +27,7 @@ header {
 
 .header-title {
   font-size: 18px;
-  color:rgb(18, 160, 220);;
+  color:rgb(18, 160, 220);
 }
 
 main {
@@ -174,3 +174,11 @@ button:hover {
 #drawer-check:checked ~ .drawer-content {
   display: block;
 }
+
+select {
+  width: flex;
+}
+option{
+  width: flex;
+}
+
