@@ -1,4 +1,8 @@
 <?php
+/**
+ * ログイン画面
+ * @author Toma
+ */
 session_start();
 
 //データベース接続定義

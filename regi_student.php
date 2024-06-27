@@ -1,4 +1,8 @@
 <?php
+/**
+ * 生徒登録
+ * @author Toma
+ */
 session_start();
 date_default_timezone_set('Asia/Tokyo');
 
@@ -91,10 +95,10 @@ $conn->close();
         <input type="text" id="student_no" name="student_no" placeholder="学籍番号を入力してください" required>
         <label for="class_name">クラス</label>
         <select name="class_name" id="class_name">
-                    <?php foreach ($class as $c) : ?>
-                    <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
-                    <?php $i++; endforeach ?>
-                </select>
+            <?php foreach ($class as $c) : ?>
+            <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
+            <?php endforeach ?>
+        </select>
         <div id="button">
             <button type="submit">登録</button>
         </div>
