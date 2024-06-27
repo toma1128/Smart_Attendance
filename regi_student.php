@@ -8,6 +8,23 @@ if(!isset($_SESSION['teacher_no'])) {
     exit();
 }
 
+//データベース接続定義
+$host = 'localhost';
+$dbname = 'teamb';
+$username = 'test';
+$password = 'test';
+
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// クラス名とクラスIDを取得
+$sel_class = "SELECT CLASS_NO, CNAME FROM CLASS";
+$stmt = $conn->prepare($sel_class);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()) {
+    $class[] = $row;
+}
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $student_no = $_POST['student_no'];
     $class_name = $_POST['class_name'];
@@ -20,19 +37,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $destination = $uploadDirectory . $photo_name;
     move_uploaded_file($photo, $destination);
 
-    //データベース接続定義
-    $host = 'localhost';
-    $dbname = 'teamb';
-    $username = 'test';
-    $password = 'test';
-
     // データベースに接続
-    $conn = new mysqli($host, $username, $password, $dbname);
-    $sql = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$destination')";
-    $stmt = $conn->prepare($sql);
+    $ins_stu = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$destination')";
+    $stmt = $conn->prepare($ins_stu);
     $stmt->execute();
     $result = $stmt->get_result();
 }
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -78,8 +89,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="file" id="photo" name="photo" required>
         <label for="student_no">学籍番号</label>
         <input type="text" id="student_no" name="student_no" placeholder="学籍番号を入力してください" required>
-        <label for="class_name">クラス番号</label>
-        <input type="text" id="class_name" name="class_name" placeholder="クラス番号を選んでください" required> 
+        <label for="class_name">クラス</label>
+        <select name="class_name" id="class_name">
+                    <?php foreach ($class as $c) : ?>
+                    <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
+                    <?php $i++; endforeach ?>
+                </select>
         <div id="button">
             <button type="submit">登録</button>
         </div>
