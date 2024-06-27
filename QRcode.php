@@ -1,7 +1,39 @@
 <?php
+/**
+ * QRコード表示画面
+ * @author Toma
+ */
 session_start();
+date_default_timezone_set('Asia/Tokyo');
 
-$_SESSION['QR_ID'] = $_POST['QR_ID'];   //QRコードのIDをセッションに保存
+// ログインしていない場合はログイン画面にリダイレクト
+if(!isset($_SESSION['teacher_no'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+//データベース接続定義
+$host = 'localhost';
+$dbname = 'teamb';
+$username = 'test';
+$password = 'test';
+
+$conn = new mysqli($host, $username, $password, $dbname);
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+//attendanceheaderのIDを取得
+$getID = "SELECT MAX(HEADER_NO) FROM ATTENDANCEHEADER;";
+$result = $conn->query($getID);
+$row = $result->fetch_row();
+$header_no = $row[0] + 1;
+$_SESSION['header_ID'] = $header_no;
+
+//attendanceheaderに挿入
+$ins_header = "INSERT INTO ATTENDANCEHEADER VALUES ($header_no, $_POST[subject], $_SESSION[teacher_no], $_POST[class], NOW())";
+$stmt = $conn->prepare($ins_header);
+$stmt->execute();
+}
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="ja">

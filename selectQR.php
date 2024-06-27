@@ -1,4 +1,8 @@
 <?php
+/**
+ * QRコード選択
+ * @author Toma
+ */
 session_start();
 
 // ログインしていない場合はログイン画面にリダイレクト
@@ -14,14 +18,21 @@ $username = 'test';
 $password = 'test';
 
 $conn = new mysqli($host, $username, $password, $dbname);
-$sql = "SELECT SNAME FROM SUBJECT";
-$stmt = $conn->prepare($sql);
+$get_subject = "SELECT SNAME, SUBJECT_NO FROM SUBJECT";
+$stmt = $conn->prepare($get_subject);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$conn->close();
+// クラス名とクラスIDを取得
+$sel_class = "SELECT CLASS_NO, CNAME FROM CLASS";
+$stmt = $conn->prepare($sel_class);
+$stmt->execute();
+$class_result = $stmt->get_result();
+while ($row = $class_result->fetch_assoc()) {
+    $class[] = $row;
+}
 
-$i = 1;
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -59,12 +70,16 @@ $i = 1;
         </header>
         <main>
             <form action="./QRcode.php" method="post">
-                <select name="QR_ID" id="lang" size="4">
+                <select name="subject" id="lang" size="4">
                     <?php foreach ($result as $row) : ?>
-                    <option value="<?= $i ?>"><?php echo $row['SNAME']; ?></option>
-                    <?php $i++; endforeach ?>
+                    <option value="<?= $row['SUBJECT_NO'] ?>"><?php echo $row['SNAME']; ?></option>
+                    <?php endforeach ?>
                 </select>
-                <br>
+                <select name="class" id="lang" size="4">
+                    <?php foreach ($class as $c) : ?>
+                        <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
+                    <?php endforeach ?>
+                </select>
                 <div id="button">
                     <button onclick="location.href='./QRcode.php'">QRコードを表示</button>
                 </div>

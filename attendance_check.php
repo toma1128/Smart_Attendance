@@ -1,4 +1,8 @@
 <?php 
+/**
+ * 出席確認
+ * @author Toma
+ */
 session_start();
 
 // ログインしていない場合はログイン画面にリダイレクト
@@ -26,8 +30,8 @@ $getAttendSQL = "SELECT ANAME FROM ATTENDANCE";
 $getAttendStmt = $conn->prepare($getAttendSQL);
 $getAttendStmt->execute();
 $getAttendResult = $getAttendStmt->get_result();
-foreach ($getAttendResult as $row2) {
-  $attendance[] = $row2['ANAME'];
+foreach ($getAttendResult as $row) {
+  $attendance[] = $row['ANAME'];
 }
 $conn->close(); //接続切断
 ?>
@@ -73,13 +77,13 @@ $conn->close(); //接続切断
       <th>カメラ出席</th>
       <th>QRコード出席</th>
     </tr>
-    <?php foreach ($result as $row) : ?>
+    <?php foreach ($result as $r) : ?>
     <tr>
-      <td><?= $row['STUDENT'] ?></td>
-      <td><?= $row['NAME'] ?></td>
-      <td><?= $row['CLASS'] ?></td>
-      <td><?= $attendance[$row['CAMERA']-1] ?></td>
-      <td><?= $attendance[$row['QR']-1] ?></td>
+      <td><?= $r['STUDENT'] ?></td>
+      <td><?= $r['NAME'] ?></td>
+      <td><?= $r['CLASS'] ?></td>
+      <td><?= $attendance[$r['CAMERA']-1] ?></td>
+      <td><?= $attendance[$r['QR']-1] ?></td>
     </tr>
     <?php endforeach ?>
   </table>
