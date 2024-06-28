@@ -6,14 +6,9 @@
 */
 
 // Pythonからデータ受け取り
-
-print("communication test");
-
-// 実行するPythonファイルのパス
-$command = "python ./getData.py";
-
-// 指定したパスの実行結果を配列(第2引数)に格納
-exec($command, $stuNo);
-
-// 受け取りデータ確認
-var_dump($stuNo);
+if(isset($_POST['testdata'])){
+    echo "Pythonから受け取ったテストデータ : ".$_POST['testdata'];
+    $faceData = $_POST['testdata'];
+    $faceData = json_decode($faceData, true);
+    var_dump(is_int($faceData));
+}
