@@ -33,10 +33,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $student_no = $_POST['student_no'];
     $class_name = $_POST['class_name'];
     $sname = $_POST['sname'];
+    var_dump($_FILES['photo']);
     $photo = $_FILES['photo']['tmp_name'];
 
-    $photo_name = basename($_FILES['photo']['name']);
-    $uploadDirectory = './face_images/';
+    // $photo_name = basename($_FILES['photo']['name']);
+
+    // ファイル名を変更
+    $new_name = $student_no . substr($photo_name, -4, 4);
+    $photo_name = rename($_FILES['photo']['name'], $new_name);
+
+    $uploadDirectory = './.face_images/';
     // ファイルを移動
     $destination = $uploadDirectory . $photo_name;
     move_uploaded_file($photo, $destination);
