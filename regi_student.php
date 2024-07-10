@@ -34,18 +34,62 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $class_name = $_POST['class_name'];
     $sname = $_POST['sname'];
     $photo = $_FILES['photo']['tmp_name'];
+    $_FILES['photo']['name'] = $student_no . '.png';
 
-    $photo_name = basename($_FILES['photo']['name']);
-    $uploadDirectory = './face_images/';
+    if (empty($student_no) || empty($class_name) || empty($sname)) {
+        echo "すべての項目を入力してください。";
+        exit;
+    }
+
+    $photo_name = $_FILES['photo']['name'];
+    $uploadDirectory = './.face_images/';
+
+    // ディレクトリが存在しない場合は作成
+    if (!file_exists($uploadDirectory)) {
+        mkdir($uploadDirectory, 0777, true);
+    }
     // ファイルを移動
     $destination = $uploadDirectory . $photo_name;
-    move_uploaded_file($photo, $destination);
+    if(is_uploaded_file($photo) && is_readable($photo)) {
+        try{
+            if(move_uploaded_file($photo, $destination)) {
+                // 学生番号の重複チェック
+                $check_stmt = $conn->prepare("SELECT COUNT(*) FROM STUDENT WHERE STUDENT_NO = ?");
+                $check_stmt->bind_param("s", $student_no);
+                $check_stmt->execute();
+                $check_stmt->bind_result($count);
+                $check_stmt->fetch();
+                $check_stmt->close();
 
-    // データベースに接続
-    $ins_stu = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$destination')";
-    $stmt = $conn->prepare($ins_stu);
-    $stmt->execute();
-    $result = $stmt->get_result();
+                if($count > 0) {
+                    echo "この学籍番号は既に登録されています。";
+                    exit;
+                }
+
+        
+                // データベースに接続
+                $ins_stu = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$destination')";
+                $stmt = $conn->prepare($ins_stu);
+                if($stmt->execute()){
+                    echo "生徒アカウントを作成しました。";
+                    $result = $stmt->get_result();
+                }else{
+                    echo "生徒アカウントの作成に失敗しました。" . $conn->error;
+                }
+            }else {
+                throw new Exception('ファイルの移動に失敗しました。');
+            }
+        } catch (Exception $e) {
+            $conn->rollback();
+            echo $e->getMessage();
+            error_log($e->getMessage());
+            if(file_exists($destination)) {
+                unlink($destination);
+            }
+        }
+    }else {
+        echo "アップロードされたファイルが見つからないか、読み取れません。";
+    }
 }
 $conn->close();
 ?>
