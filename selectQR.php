@@ -70,16 +70,22 @@ $conn->close();
         </header>
         <main>
             <form action="./QRcode.php" method="post">
-                <select name="subject" id="lang" size="4">
-                    <?php foreach ($result as $row) : ?>
-                    <option value="<?= $row['SUBJECT_NO'] ?>"><?php echo $row['SNAME']; ?></option>
-                    <?php endforeach ?>
-                </select>
-                <select name="class" id="lang" size="4">
-                    <?php foreach ($class as $c) : ?>
-                        <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
-                    <?php endforeach ?>
-                </select>
+                <div>
+                    <select name="subject" size="1">
+                        <option value="" selected disabled>コースを選択してください</option>
+                        <?php foreach ($result as $row) : ?>
+                        <option value="<?= $row['SUBJECT_NO'] ?>"><?php echo $row['SNAME']; ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+                <div>
+                    <select name="class" size="1">
+                    <option value="" selected disabled>クラスを選択してください</option>
+                        <?php foreach ($class as $c) : ?>
+                            <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
                 <div id="button">
                     <button onclick="location.href='./QRcode.php'">QRコードを表示</button>
                 </div>

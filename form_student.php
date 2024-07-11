@@ -55,18 +55,23 @@ if(isset($_POST['stu_no'])) {
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>出席登録</title>
   <link rel="stylesheet" href="./Styles/form_student.css">
-
 </head>
+
 <body>
-  <h1>出席登録</h1>
-  <form action="./form_student.php?id=<?=$header_no ?>" method="post">
-    <label for="stu_no">学籍番号</label>
-    <input type="text" id="stu_no" name="stu_no" placeholder="例:0000" required>
-    <div id="button">
-      <button type="submit">出席</button>
-    </div>
-  </form>
+  <div class="container">
+    <h1>出席登録</h1>
+    <form action="./form_student.php?id=<?=$header_no ?>" method="post">
+      <div class="form-group">
+        <label for="stu_no">学籍番号</label>
+        <input type="text" id="stu_no" name="stu_no" placeholder="例:0000" required>
+      </div>
+      <div class="button-container">
+        <button type="submit">出席</button>
+      </div>
+    </form>
+  </div>
 </body>
 </html>
