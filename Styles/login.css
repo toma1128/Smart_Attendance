@@ -35,3 +35,9 @@ input{
     text-align: center;
 }
 
+/* エラーメッセージ */
+.error {
+    color: red;
+    margin-top: 0;
+    padding-bottom: 1em;
+}
