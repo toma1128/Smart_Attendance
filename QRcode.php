@@ -34,6 +34,26 @@ $stmt = $conn->prepare($ins_header);
 $stmt->execute();
 }
 $conn->close();
+
+$ch = curl_init();
+// リクエストURLを設定
+curl_setopt($ch, CURLOPT_URL, "http://100.78.13.89:5000/face_attend");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+curl_setopt($ch, CURLOPT_TIMEOUT, 150);
+
+// リクエストを送信し、レスポンスを取得
+$response = curl_exec($ch);
+
+if(curl_errno($ch)) {
+    echo 'Error:' . curl_error($ch);
+}
+
+// cURLリソースを閉じる
+curl_close($ch);
+
+echo $response;
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">

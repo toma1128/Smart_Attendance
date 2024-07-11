@@ -2,12 +2,46 @@
 /**
 * File : exchange.php
 * Date : 2024/06/25
-* Author : H.Kitagawa
+* Author : H.Kitagawa,Toma
 */
 
+//データベース接続定義
+$host = 'localhost';
+$dbname = 'teamb';
+$username = 'test';
+$password = 'test';
+
+date_default_timezone_set('Asia/Tokyo');
+
 // Pythonからデータ受け取り
-if(isset($_POST['testdata'])){
-    $faceData = $_POST['testdata'];
-    $faceData = json_decode($faceData, true);   //数値に変換
-    
+if(isset($_POST['data'])){
+    session_start();
+    $header_no = $_SESSION['header_ID'];
+    $conn = new mysqli($host, $username, $password, $dbname);
+
+    $faceData = $_POST['data'];
+    foreach ($faceData as $data) {
+
+        $check_stuNo = "SELECT STUDENT_NO FROM STUDENT WHERE STUDENT_NO = $data";
+        $stmt = $conn->prepare($check_stuNo);
+        $stmt->execute();
+        if($stmt->get_result()) {
+
+            $check_detail = "SELECT * FROM ATTENDANCEDETAIL WHERE HEADER_NO = $header_no AND STUDENT = $data";
+            $stmt2 = $conn->prepare($check_detail);
+            $stmt2->execute();
+            if($stmt2->get_result()) {
+            $update = "UPDATE ATTENDANCEDETAIL SET CAMERA = 1, CAMERA_TIME = NOW() WHERE HEADER_NO = $header_no AND STUDENT = $data";
+            $stmt = $conn->prepare($update);
+            $stmt->execute();
+            $msg = "出席を更新しました。";
+            }else{
+            $insert = "INSERT INTO ATTENDANCEDETAIL VALUES ($header_no, $data, 1, NOW(), 2, NULL)";
+            $stmt = $conn->prepare($insert);
+            $stmt->execute();
+            $msg = "出席を登録しました。";
+            }
+        }
+        $conn->close();
+    }
 }
