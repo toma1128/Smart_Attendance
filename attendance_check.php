@@ -146,9 +146,19 @@ $conn->close(); //接続切断
       <td><?= htmlspecialchars($r['CLASS']) ?></td>
       <td class="subject"><?= htmlspecialchars($r['SUBJECT']) ?></td>
       <td><?= htmlspecialchars($attendance[$r['CAMERA']-1]) ?></td>
-      <td><?= $r['CTIME'] ?></td>
+      <td><?php
+        if ($r['CTIME'] != null) {
+          echo substr($r['CTIME'], 0, -3);
+        } else {
+          echo $r['CTIME'];
+        } ?></td>
       <td><?= htmlspecialchars($attendance[$r['QR']-1]) ?></td>
-      <td><?= $r['QTIME'] ?></td>
+      <td><?php
+        if ($r['QTIME'] != null) {
+          echo substr($r['QTIME'], 0, -3);
+        } else {
+          echo $r['QTIME'];
+        } ?></td>
     </tr>
     <?php endforeach ?>
   </table>
