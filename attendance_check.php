@@ -21,7 +21,7 @@ $password = 'test';
 $conn = new mysqli($host, $username, $password, $dbname);
 
 //出席データを取得
-$attend_sql = "SELECT DETAIL.STUDENT AS STUDENT, DETAIL.CAMERA AS CAMERA, DETAIL.CAMERA_TIME AS CTIME, DETAIL.QR AS QR, DETAIL.QR_TIME AS QTIME, STU.SNAME AS NAME, C.CNAME AS CLASS, SUB.SNAME AS SUBJECT 
+$attend_sql = "SELECT DETAIL.STUDENT AS STUDENT, DETAIL.CAMERA AS CAMERA, DETAIL.CAMERA_TIME AS CTIME, DETAIL.QR AS QR, DETAIL.QR_TIME AS QTIME, STU.SNAME AS NAME, C.CNAME AS CLASS, SUB.SNAME AS SUBJECT, HEADER.LESSON_DATE AS DATE
 FROM ATTENDANCEDETAIL AS DETAIL LEFT JOIN STUDENT AS STU ON (DETAIL.STUDENT = STU.STUDENT_NO) 
 LEFT JOIN CLASS AS C ON (STU.CLASS = C.CLASS_NO) 
 LEFT JOIN ATTENDANCEHEADER AS HEADER ON (DETAIL.HEADER_NO = HEADER.HEADER_NO) 
@@ -29,6 +29,8 @@ LEFT JOIN SUBJECT AS SUB ON (HEADER.SUBJECT = SUB.SUBJECT_NO)";
 
 $where = " WHERE 1=1";
 $params = array();
+
+$order = " ORDER BY HEADER.LESSON_DATE, DETAIL.STUDENT";
 
 if(!empty($_POST['class'])) {
     $where .= " AND C.CLASS_NO = ?";
@@ -39,7 +41,7 @@ if(!empty($_POST['subject'])) {
     $params[] = $_POST['subject'];
 }
 
-$stmt = $conn->prepare($attend_sql . $where);
+$stmt = $conn->prepare($attend_sql . $where . $order);
 if (!empty($params)) {
     $types = str_repeat('i', count($params));
     $stmt->bind_param($types, ...$params);
@@ -134,6 +136,7 @@ $conn->close(); //接続切断
       <th>名前</th>
       <th>クラス</th>
       <th>授業</th>
+      <th>日付</th>
       <th>カメラ出席</th>
       <th>カメラ時刻</th>
       <th>QR出席</th>
@@ -145,6 +148,7 @@ $conn->close(); //接続切断
       <td><?= htmlspecialchars($r['NAME']) ?></td>
       <td><?= htmlspecialchars($r['CLASS']) ?></td>
       <td class="subject"><?= htmlspecialchars($r['SUBJECT']) ?></td>
+      <td><?= $r['DATE'] ?></td>
       <td><?= htmlspecialchars($attendance[$r['CAMERA']-1]) ?></td>
       <td><?php
         if ($r['CTIME'] != null) {
