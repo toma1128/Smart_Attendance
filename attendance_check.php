@@ -21,7 +21,7 @@ $password = 'test';
 $conn = new mysqli($host, $username, $password, $dbname);
 
 //出席データを取得
-$attend_sql = "SELECT DETAIL.STUDENT AS STUDENT, DETAIL.CAMERA AS CAMERA, DETAIL.QR AS QR, STU.SNAME AS NAME, C.CNAME AS CLASS, SUB.SNAME AS SUBJECT 
+$attend_sql = "SELECT DETAIL.STUDENT AS STUDENT, DETAIL.CAMERA AS CAMERA, DETAIL.CAMERA_TIME AS CTIME, DETAIL.QR AS QR, DETAIL.QR_TIME AS QTIME, STU.SNAME AS NAME, C.CNAME AS CLASS, SUB.SNAME AS SUBJECT 
 FROM ATTENDANCEDETAIL AS DETAIL LEFT JOIN STUDENT AS STU ON (DETAIL.STUDENT = STU.STUDENT_NO) 
 LEFT JOIN CLASS AS C ON (STU.CLASS = C.CLASS_NO) 
 LEFT JOIN ATTENDANCEHEADER AS HEADER ON (DETAIL.HEADER_NO = HEADER.HEADER_NO) 
@@ -135,7 +135,9 @@ $conn->close(); //接続切断
       <th>クラス</th>
       <th>授業</th>
       <th>カメラ出席</th>
+      <th>カメラ時刻</th>
       <th>QR出席</th>
+      <th>QR時刻</th>
     </tr>
     <?php foreach ($result as $r) : ?>
     <tr>
@@ -144,7 +146,9 @@ $conn->close(); //接続切断
       <td><?= htmlspecialchars($r['CLASS']) ?></td>
       <td class="subject"><?= htmlspecialchars($r['SUBJECT']) ?></td>
       <td><?= htmlspecialchars($attendance[$r['CAMERA']-1]) ?></td>
+      <td><?= $r['CTIME'] ?></td>
       <td><?= htmlspecialchars($attendance[$r['QR']-1]) ?></td>
+      <td><?= $r['QTIME'] ?></td>
     </tr>
     <?php endforeach ?>
   </table>
