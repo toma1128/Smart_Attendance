@@ -12,6 +12,16 @@ if(!isset($_SESSION['teacher_no'])) {
   exit();
 }
 
+// 教科・クラス未選択の場合
+if ($_POST['subject'] == null || $_POST['class'] == null) {
+  // セッション変数でエラーメッセージ引渡
+  $_SESSION['error'] = "教科・クラスの選択が完了していません。";
+
+  // 選択画面へリダイレクト
+  header("Location: ./selectQR.php");
+  exit();
+}
+
 //データベース接続定義
 $host = 'localhost';
 $dbname = 'teamb';
@@ -19,6 +29,7 @@ $username = 'test';
 $password = 'test';
 
 $conn = new mysqli($host, $username, $password, $dbname);
+
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 //attendanceheaderのIDを取得
