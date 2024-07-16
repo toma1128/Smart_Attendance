@@ -142,7 +142,7 @@ $conn->close(); //接続切断
       <td><?= htmlspecialchars($r['STUDENT']) ?></td>
       <td><?= htmlspecialchars($r['NAME']) ?></td>
       <td><?= htmlspecialchars($r['CLASS']) ?></td>
-      <td><?= htmlspecialchars($r['SUBJECT']) ?></td>
+      <td class="subject"><?= htmlspecialchars($r['SUBJECT']) ?></td>
       <td><?= htmlspecialchars($attendance[$r['CAMERA']-1]) ?></td>
       <td><?= htmlspecialchars($attendance[$r['QR']-1]) ?></td>
     </tr>
