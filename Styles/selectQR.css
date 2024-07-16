@@ -205,3 +205,9 @@ select::-webkit-scrollbar-thumb {
 select::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* エラーメッセージ */
+.error {
+  color: red;       /* 文字色：赤 */
+  margin: 0 0 1em;    /* 余白　上左右：0　下：1文字分 */
+}
