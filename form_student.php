@@ -23,26 +23,22 @@ if(isset($_POST['stu_no'])) {
   $conn = new mysqli($host, $username, $password, $dbname);
 
   // 学籍番号存在確認
-  $check_stuNo = "SELECT STUDENT_NO FROM STUDENT WHERE STUDENT_NO = ?";
+  $check_stuNo = "SELECT STUDENT_NO FROM STUDENT WHERE STUDENT_NO = $_POST[stu_no]";
   $stmt = $conn->prepare($check_stuNo);
-  $stmt->bind_param('i', $_POST['stu_no']);
   $stmt->execute();
   if($stmt->get_result()) {
 
-    $check_detail = "SELECT * FROM ATTENDANCEDETAIL WHERE HEADER_NO = ? AND STUDENT = ?";
+    $check_detail = "SELECT * FROM ATTENDANCEDETAIL WHERE HEADER_NO = $header_no AND STUDENT = $_POST[stu_no]";
     $stmt2 = $conn->prepare($check_detail);
-    $stmt2->bind_param('i', $header_no, $_POST['stu_no']);
     $stmt2->execute();
     if($stmt2->get_result()) {
-      $update = "UPDATE ATTENDANCEDETAIL SET QR = 1, QR_TIME = NOW() WHERE HEADER_NO = ? AND STUDENT = ?";
+      $update = "UPDATE ATTENDANCEDETAIL SET QR = 1, QR_TIME = NOW() WHERE HEADER_NO = $header_no AND STUDENT = $_POST[stu_no]";
       $stmt = $conn->prepare($update);
-      $stmt->bind_param('i', $header_no, $_POST['stu_no']);
       $stmt->execute();
       $msg = "出席を更新しました。";
     }else{
       $insert = "INSERT INTO ATTENDANCEDETAIL VALUES ($header_no, $_POST[stu_no], 2, NULL, 1, NOW())";
       $stmt = $conn->prepare($insert);
-      $stmt->bind_param('i', $header_no, $_POST['stu_no']);
       $stmt->execute();
       $msg = "出席を登録しました。";
     }
