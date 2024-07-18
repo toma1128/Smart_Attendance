@@ -128,6 +128,9 @@ $conn->close(); //接続切断
       <option value="<?= $s['SUBJECT_NO'] ?>"><?= $s['SNAME'] ?></option>
       <?php endforeach ?>
     </select>
+    <label for="date">日付を選択</label>
+    <input type="date" id="date" name="date" value=""  required>
+    <button type="submit" class="search-button">検索</button>
     <button type="submit" class="search-button">検索</button>
   </form>
 
