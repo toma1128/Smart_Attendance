@@ -76,9 +76,8 @@ curl_close($ch);
 </head>
 <body>
 <header>
-  <div class="header-content">
+<img src="images/logo1.jpg" alt="logo" >
     <h1 class="header-title">ECCコンピュータ専門学校</h1>
-  </div>
   <div class="drawer">
     <!-- ハンバーガーメニューの表示・非表示を切り替えるチェックボックス -->
     <input type="checkbox" id="drawer-check" class="drawer-hidden">

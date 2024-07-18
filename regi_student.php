@@ -106,8 +106,8 @@ $conn->close();
 <body>
     <!-- ヘッダー部分 -->
     <header>
-        <div class="header-content">
-            <h1><div class="header-title">ECCコンピュータ専門学校</div></h1>
+        <img src="images/logo1.jpg" alt="logo" >
+        <div class="header-title">生徒アカウント作成</div>
             <div class="drawer">
                 <!-- ハンバーガーメニューの表示・非表示を切り替えるチェックボックス -->
                 <input type="checkbox" id="drawer-check" class="drawer-hidden">
@@ -130,7 +130,6 @@ $conn->close();
             </div>
         </div>
     </header>
-    <h1>生徒アカウント作成</h1>
     <form action="./regi_student.php" method="POST" enctype="multipart/form-data">
         <label for="student_name">名前</label>
         <input type="text" name="sname" id="student_name" placeholder="学生名を入力ください" required>

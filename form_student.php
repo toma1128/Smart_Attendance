@@ -65,9 +65,15 @@ if(isset($_POST['stu_no'])) {
 </head>
 
 <body>
+  <header>
+    <img src="./images/logo1.jpg" alt="logo" >
+    <div class="header-content">
+      <h1 class="header-title">ECCコンピュータ専門学校</h1>
+    </div>
+  </header>
   <div class="container">
-    <h1>出席登録</h1>
     <form action="./form_student.php?id=<?=$header_no ?>" method="post">
+      <h1>出席登録</h1>
       <div class="form-group">
         <label for="stu_no">学籍番号</label>
         <input type="text" id="stu_no" name="stu_no" placeholder="例:0000" required>

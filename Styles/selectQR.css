@@ -1,11 +1,13 @@
-body {
-  font-family: Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
   background-color: #f2f2f2;
   padding: 20px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 header {
@@ -14,86 +16,35 @@ header {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-.header-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .header-title {
-  font-size: 18px;
-  color:rgb(18, 160, 220);
-}
-
-main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  font-size: 30px;
+  color: rgb(18, 160, 220);
+  font-weight: bolder;
   flex-grow: 1;
-  padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
 }
 
-h1 {
-  text-align: center;
-  color: rgb(18, 184, 240);
+header img{
+  vertical-align: middle;
+  max-height: 70px;
+  max-width: 200px;
+  width: auto;
+  height: auto;
+  margin-right:20px;
 }
 
-form {
-  max-width: 600px;
-  width: 100%;
-  background-color: #fff;
-  padding: 60px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="file"],
-select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
-}
-
-input[type="file"] {
-  padding: 5px;
-}
-
-#button {
-  text-align: center;
-}
-
-button {
-  background-color: rgb(18, 184, 240);
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: rgb(18, 160, 220);
+.drawer {
+  margin-left: auto; /* ハンバーガーメニューを右寄せ */
+  position: relative;
 }
 
 .drawer {
   position: relative;
+  float: right;
 }
 
 .drawer-hidden {
@@ -137,7 +88,7 @@ button:hover {
 .drawer-content {
   position: absolute;
   top: 40px;
-  right: 0;  /* メニューを右に配置 */
+  right: 0;
   background-color: #fff;
   width: 200px;
   border: 1px solid #ddd;
@@ -148,8 +99,6 @@ button:hover {
 
 .drawer-list {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 .drawer-item {
@@ -175,18 +124,82 @@ button:hover {
   display: block;
 }
 
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
+}
+
+h1 {
+  text-align: center;
+  color: rgb(18, 184, 240);
+}
+
+form {
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  padding: 60px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-size-adjust: 4em;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+input[type="file"] {
+  padding: 5px;
+}
+
+#button {
+  text-align: center;
+}
+
+button {
+  background-color: rgb(18, 184, 240);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: rgb(18, 160, 220);
+}
+
 select {
   width: flex;
   max-height: 150px;
   overflow-y: auto;
   -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right 10px center;
-    background-color: white;
-    padding-right: 30px;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right 10px center;
+  background-color: white;
+  padding-right: 30px;
 }
-option{
+
+option {
   width: 600px;
 }
 
@@ -204,10 +217,4 @@ select::-webkit-scrollbar-thumb {
 
 select::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-/* エラーメッセージ */
-.error {
-  color: red;       /* 文字色：赤 */
-  margin: 0 0 1em;    /* 余白　上左右：0　下：1文字分 */
 }
