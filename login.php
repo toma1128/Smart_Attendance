@@ -58,7 +58,12 @@ if (isset($_POST['teacher_no'])) {
 </head>
 
 <body>
-    <h1>教員ログイン</h1>
+    <header>
+        <img src="images/logo1.jpg" alt="logo" >
+        <div class="header-content">
+            <h1 class="header-title">教員ログイン</h1>
+        </div>
+    </header>
     <form action="./login.php" method="post">
         <label for="teacher_no">教員番号</label>
         <input type="text" id="teacher_no" name="teacher_no" placeholder="教員番号を入力ください" required>

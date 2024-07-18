@@ -4,17 +4,16 @@
 * Date : 2024/06/25
 * Author : H.Kitagawa,Toma
 */
-
-//データベース接続定義
-$host = 'localhost';
-$dbname = 'teamb';
-$username = 'test';
-$password = 'test';
-
 date_default_timezone_set('Asia/Tokyo');
 
 // Pythonからデータ受け取り
 if(isset($_POST['data'])){
+    //データベース接続定義
+    $host = 'localhost';
+    $dbname = 'teamb';
+    $username = 'test';
+    $password = 'test';
+
     session_start();
     $header_no = $_SESSION['header_ID'];
     $conn = new mysqli($host, $username, $password, $dbname);

@@ -87,6 +87,7 @@ $conn->close(); //接続切断
 </head>
 <body>
   <header>
+    <img src="images/logo1.jpg" alt="logo" >
     <div class="header-content">
       <h1 class="header-title">出席確認</h1>
       <div class="drawer">
