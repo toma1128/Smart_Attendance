@@ -1,11 +1,13 @@
-body {
-    font-family: Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body{
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #f2f2f2;
     padding: 20px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 header {
@@ -14,21 +16,26 @@ header {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.header-content {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-title {
-    font-size: 18px;
+  }
+ 
+ 
+  .header-title {
+    text-align: center;
+    font-size: 30px;
     color: rgb(18, 160, 220);
-}
+    font-weight: bolder;
+    flex-grow: 1;
+  }
+
+  header img{
+    vertical-align: middle;
+    max-height: 70px;
+    max-width: 200px;
+    width: auto;
+    height: auto;
+    margin-right:20px;
+  }
 
 main {
     width: 100%;
@@ -39,11 +46,6 @@ main {
     padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
 }
 
-h1 {
-    text-align: center;
-    color: rgb(18, 184, 240);
-}
-
 form {
     max-width: 400px;
     width: 100%;
@@ -51,6 +53,7 @@ form {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
 }
 
 label {
@@ -93,7 +96,7 @@ button:hover {
 }
 
 .drawer {
-    position: relative;
+    margin-left: 20px;
 }
 
 .drawer-hidden {
@@ -174,3 +177,12 @@ button:hover {
 #drawer-check:checked ~ .drawer-content {
     display: block;
 }
+
+header img{
+    vertical-align: middle;
+    max-height: 70px;
+    max-width: 200px;
+    width: auto;
+    height: auto;
+    margin: 0;
+  }

@@ -9,20 +9,48 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f2f2f2;
   display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
-  padding: 20px;
-  margin:10px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ヘッダースタイル */
+header {
+  margin-top:20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+header img {
+  max-width: 200px;
+  max-height: 70px;
+  width: auto;
+  height: auto;
+}
+
+.header-content {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 30px;
+  color: rgb(18, 160, 220);
 }
 
 .container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-h1 {
+form h1 {
   color: rgb(18, 184, 240);
   text-align: center;
   margin-bottom: 20px;

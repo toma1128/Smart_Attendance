@@ -52,30 +52,27 @@ $conn->close();
 <body>
     <!-- ヘッダー部分 -->
     <header>
-        <div class="header-content">
-            <h1>
-                <div class="header-title">ECCコンピュータ専門学校</div>
-            </h1>
-            <div class="drawer">
-                <!-- ハンバーガーメニューの表示・非表示を切り替えるチェックボックス -->
-                <input type="checkbox" id="drawer-check" class="drawer-hidden">
-                <!-- ハンバーガーアイコン -->
-                <label for="drawer-check" class="drawer-open"><span></span></label>
-                <!-- メニュー -->
-                <nav class="drawer-content">
-                    <ul class="drawer-list">
-                        <li class="drawer-item">
-                            <a href="attendance_check.php">出席確認</a>
-                        </li>
-                        <li class="drawer-item">
-                            <a href="regi_student.php">生徒登録</a>
-                        </li>
-                        <li class="drawer-item">
-                            <a href="./login.php" name="logout">ログアウト</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+        <img src="./images/logo1.jpg" alt="logo" >
+        <div class="header-title">QRコード選択</div>
+        <div class="drawer">
+            <!-- ハンバーガーメニューの表示・非表示を切り替えるチェックボックス -->
+            <input type="checkbox" id="drawer-check" class="drawer-hidden">
+            <!-- ハンバーガーアイコン -->
+            <label for="drawer-check" class="drawer-open"><span></span></label>
+            <!-- メニュー -->
+            <nav class="drawer-content">
+                <ul class="drawer-list">
+                    <li class="drawer-item">
+                        <a href="attendance_check.php">出席確認</a>
+                    </li>
+                    <li class="drawer-item">
+                        <a href="regi_student.php">生徒登録</a>
+                    </li>
+                    <li class="drawer-item">
+                        <a href="./login.php" name="logout">ログアウト</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </header>
     <main>
