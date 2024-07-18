@@ -40,8 +40,9 @@ $header_no = $row[0] + 1;
 $_SESSION['header_ID'] = $header_no;
 
 //attendanceheaderに挿入
-$ins_header = "INSERT INTO ATTENDANCEHEADER VALUES ($header_no, $_POST[subject], $_SESSION[teacher_no], $_POST[class], NOW())";
+$ins_header = "INSERT INTO ATTENDANCEHEADER VALUES (?, ?, ?, ?, NOW())";
 $stmt = $conn->prepare($ins_header);
+$stmt->bind_param('iiii', $header_no, $_POST['subject'], $_SESSION['teacher_no'], $_POST['class']);
 $stmt->execute();
 }
 $conn->close();
