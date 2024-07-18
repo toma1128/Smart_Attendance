@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sname = $_POST['sname'];
     var_dump($_FILES['photo']);
     $photo = $_FILES['photo']['tmp_name'];
-    $_FILES['photo']['name'] = $student_no . '.png';
+    $_FILES['photo']['name'] = $student_no . '.jpg';
 
     if (empty($student_no) || empty($class_name) || empty($sname)) {
         echo "すべての項目を入力してください。";

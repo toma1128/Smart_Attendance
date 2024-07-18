@@ -63,7 +63,7 @@ if(curl_errno($ch)) {
 // cURLリソースを閉じる
 curl_close($ch);
 
-echo $response;
+// echo $response;
 
 ?>
 <!DOCTYPE html>
