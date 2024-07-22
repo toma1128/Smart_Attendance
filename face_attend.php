@@ -24,12 +24,16 @@ if(isset($_POST['data'])){
         $check_stuNo = "SELECT STUDENT_NO FROM STUDENT WHERE STUDENT_NO = $data";
         $stmt = $conn->prepare($check_stuNo);
         $stmt->execute();
-        if($stmt->get_result()) {
+        $result = $stmt->get_result();
+
+        if($result->num_rows > 0) {
 
             $check_detail = "SELECT * FROM ATTENDANCEDETAIL WHERE HEADER_NO = $header_no AND STUDENT = $data";
             $stmt2 = $conn->prepare($check_detail);
             $stmt2->execute();
-            if($stmt2->get_result()) {
+            $result2 = $stmt2->get_result();
+
+            if($result2->num_rows > 0) {
             $update = "UPDATE ATTENDANCEDETAIL SET CAMERA = 1, CAMERA_TIME = NOW() WHERE HEADER_NO = $header_no AND STUDENT = $data";
             $stmt = $conn->prepare($update);
             $stmt->execute();
