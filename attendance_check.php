@@ -158,6 +158,7 @@ $conn->close(); //接続切断
       <th>クラス</th>
       <th>授業</th>
       <th>日付</th>
+      <th>出欠</th>
       <th>カメラ出席</th>
       <th>カメラ時刻</th>
       <th>QR出席</th>
@@ -170,6 +171,11 @@ $conn->close(); //接続切断
         <td><?= htmlspecialchars($r['CLASS']) ?></td>
         <td class="subject"><?= htmlspecialchars($r['SUBJECT']) ?></td>
         <td><?= $r['DATE'] ?></td>
+        <td><?php if ($r['CTIME'] != null && $r['QTIME'] != null) {
+          echo '出席';
+        }else {
+          echo '欠席';
+        } ?></td>
         <td><?= htmlspecialchars($attendance[$r['CAMERA'] - 1]) ?></td>
         <td><?php
         if ($r['CTIME'] != null) {
