@@ -79,7 +79,7 @@ if(isset($_POST['stu_no'])) {
       <h1>出席登録</h1>
       <div class="form-group">
         <label for="stu_no">学籍番号</label>
-        <input type="text" id="stu_no" name="stu_no" placeholder="例:0000" required>
+        <input type="text" id="stu_no" name="stu_no" placeholder="例:0000000" required>
       </div>
       <div class="button-container">
         <button type="submit">出席</button>
