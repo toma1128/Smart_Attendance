@@ -32,7 +32,7 @@ if (isset($_POST['teacher_no'])) {
         $pass = $row['PASS'];
         if ($pass == $_POST['password']) {
             $_SESSION['teacher_no'] = $_POST['teacher_no'];
-            header("Location: ./attendance_check.php");
+            header("Location: ./select_attendance.php");
             exit();
         } else {
             throw new Exception('※パスワードが間違っています', 2);

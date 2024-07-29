@@ -119,6 +119,9 @@ $conn->close(); //接続切断
         <!-- メニュー -->
         <nav class="drawer-content">
           <ul class="drawer-list">
+            <li>
+              <a href="./select_attendance.php">出席確認</a>
+            </li>
             <li class="drawer-item">
               <a href="./regi_student.php">生徒登録</a>
             </li><!-- /.drawer-item -->

@@ -117,7 +117,7 @@ $conn->close();
                 <nav class="drawer-content">
                     <ul class="drawer-list">
                         <li class="drawer-item">
-                            <a href="./attendance_check.php">出席確認</a>
+                            <a href="./select_attendance.php">出席確認</a>
                         </li>
                         <li class="drawer-item">
                             <a href="./selectQR.php">QRコード表示</a>
