@@ -6,10 +6,10 @@
 session_start();
 
 // ログインしていない場合はログイン画面にリダイレクト
-if (!isset($_SESSION['teacher_no'])) {
-  header("Location: ./login.php");
-  exit();
-}
+// if (!isset($_SESSION['teacher_no'])) {
+//   header("Location: ./login.php");
+//   exit();
+// }
 
 //データベース接続定義
 $host = 'localhost';
@@ -35,10 +35,10 @@ $params = array();
 
 $order = " ORDER BY HEADER.LESSON_DATE, DETAIL.STUDENT";
 
-if (!empty($_POST['class'])) {
-  $where .= " AND C.CLASS_NO = ?";
-  $params[] = $_POST['class'];
-}
+// if (!empty($_POST['class'])) {
+//   $where .= " AND C.CLASS_NO = ?";
+//   $params[] = $_POST['class'];
+// }
 if (!empty($_POST['subject'])) {
   $where .= " AND SUB.SUBJECT_NO = ?";
   $params[] = $_POST['subject'];
@@ -138,12 +138,12 @@ $conn->close(); //接続切断
   </header>
 
   <form action="./attendance_check.php" class="search-form" name="search" method="POST">
-    <select name="class" class="select">
+    <!-- <select name="class" class="select">
       <option value="">クラスを選択</option>
       <?php foreach ($class as $c): ?>
         <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
       <?php endforeach ?>
-    </select>
+    </select> -->
     <select name="subject" class="select">
       <option value="">授業を選択</option>
       <?php foreach ($subject as $s): ?>
@@ -162,10 +162,6 @@ $conn->close(); //接続切断
       <th>授業</th>
       <th>日付</th>
       <th>出欠</th>
-      <th>カメラ出席</th>
-      <th>カメラ時刻</th>
-      <th>QR出席</th>
-      <th>QR時刻</th>
     </tr>
     <?php foreach ($result as $r): ?>
       <tr>
@@ -174,25 +170,33 @@ $conn->close(); //接続切断
         <td><?= htmlspecialchars($r['CLASS']) ?></td>
         <td class="subject"><?= htmlspecialchars($r['SUBJECT']) ?></td>
         <td><?= $r['DATE'] ?></td>
-        <td><?php if ($r['CTIME'] != null && $r['QTIME'] != null) {
-          echo '出席';
-        }else {
-          echo '欠席';
-        } ?></td>
-        <td><?= htmlspecialchars($attendance[$r['CAMERA'] - 1]) ?></td>
-        <td><?php
-        if ($r['CTIME'] != null) {
-          echo substr($r['CTIME'], 0, -3);
-        } else {
-          echo $r['CTIME'];
-        } ?></td>
-        <td><?= htmlspecialchars($attendance[$r['QR'] - 1]) ?></td>
-        <td><?php
-        if ($r['QTIME'] != null) {
-          echo substr($r['QTIME'], 0, -3);
-        } else {
-          echo $r['QTIME'];
-        } ?></td>
+        <td>
+          <details>
+            <summary>
+              <?php if ($r['CTIME'] != null && $r['QTIME'] != null) {
+                echo '出席';
+              }else {
+                echo '欠席';
+              } ?>
+            </summary>
+            <p>カメラ : <?= htmlspecialchars($attendance[$r['CAMERA'] - 1]) ?>
+              <?php
+              if ($r['CTIME'] != null) {
+                echo substr($r['CTIME'], 0, -3);
+              } else {
+                echo $r['CTIME'];
+              } ?>
+            </p>
+            <p>QR : <?= htmlspecialchars($attendance[$r['QR'] - 1]) ?>
+              <?php
+              if ($r['QTIME'] != null) {
+                echo substr($r['QTIME'], 0, -3);
+              } else {
+                echo $r['QTIME'];
+              } ?>
+            </p>
+          </details>
+        </td>
       </tr>
     <?php endforeach ?>
   </table>

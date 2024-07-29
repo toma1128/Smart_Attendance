@@ -7,10 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>教室選択</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./JS/select_attendance.js"></script>
     <link rel="stylesheet" href="./Styles/select_attendance.css">
 </head>
 <body>
-<header>
+    <header>
         <img src="images/logo1.jpg" alt="logo" >
         <div class="header-title">出席確認選択</div>
             <div class="drawer">
@@ -35,5 +37,11 @@
             </div>
         </div>
     </header>
+    <main>
+    <div class="door-wrap">
+        <!-- <img src="./images/door.png" alt="ドア" class="door"> -->
+        <!-- <img src="img/door_back.png" alt="ドアの縁" class="door-back"> -->
+    </div>
+    </main>
 </body>
 </html>
