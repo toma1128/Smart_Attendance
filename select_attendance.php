@@ -38,10 +38,17 @@
         </div>
     </header>
     <main>
-    <div class="door-wrap">
-        <!-- <img src="./images/door.png" alt="ドア" class="door"> -->
-        <!-- <img src="img/door_back.png" alt="ドアの縁" class="door-back"> -->
-    </div>
+        <form action="./attendance_check.php" method="POST">
+            <!-- このdoors-wrapper classをforeach文で回してほしい  -->
+            <div class="doors-wrapper">
+                <button type="submit" name="class" value="" class="door-container"> <!--valueの場所にクラスIDを入れて欲しい-->
+                    <p>IE2A</p> <!-- ここにクラス名を表示して欲しい -->
+                    <div class="door-bg"></div>
+                    <div class="door"></div>
+                </button>
+            </div>
+            <!-- end of foreach -->
+        </form>
     </main>
 </body>
 </html>
