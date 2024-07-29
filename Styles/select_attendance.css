@@ -19,34 +19,35 @@ header {
     align-items: center;
 }
  
- 
-  .header-title {
+.header-title {
     text-align: center;
     font-size: 30px;
     color: rgb(18, 160, 220);
     font-weight: bolder;
     flex-grow: 1;
-  }
+}
 
-  header img{
+header img{
     vertical-align: middle;
     max-height: 70px;
     max-width: 200px;
     width: auto;
     height: auto;
     margin-right:20px;
-  }
+}
 
 main {
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: 70px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* flex-grow: 1; */
     padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
 }
 
-form {
+/* form {
     max-width: 400px;
     width: 100%;
     background-color: #fff;
@@ -54,7 +55,7 @@ form {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 30px auto;
-}
+} */
 
 label {
     display: block;
@@ -75,24 +76,6 @@ select {
 
 input[type="file"] {
     padding: 5px;
-}
-
-#button {
-    text-align: center;
-}
-
-button {
-    background-color: rgb(18, 184, 240);
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: rgb(18, 160, 220);
 }
 
 .drawer {
@@ -119,7 +102,7 @@ button:hover {
     height: 4px;
     background-color: #333;
     position: absolute;
-    transition: all 0.3s ease-in-out;
+
 }
 
 .drawer-open span {
@@ -147,6 +130,7 @@ button:hover {
     border-radius: 4px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     display: none;
+    z-index: 999;
 }
 
 .drawer-list {
@@ -178,11 +162,56 @@ button:hover {
     display: block;
 }
 
-header img{
+header img {
     vertical-align: middle;
     max-height: 70px;
     max-width: 200px;
     width: auto;
     height: auto;
     margin: 0;
-  }
+}
+
+/* --------ドアのモーション-------- */
+.door-container {
+    position: relative;
+    width : 120px;
+    height: 160px;
+    perspective: 1000px;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+}
+
+.door-container p {
+    font-size: 20px;
+    text-align: center;
+}
+
+.door-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('../images/door_bg.png') no-repeat center center;
+    background-size: cover;
+    z-index: 1;
+}
+
+.door {
+    position: relative;
+    width: 100%;
+    height: 97%;
+    background: url('../images/door.png') no-repeat center center;
+    background-size: cover;
+    transform-origin: right;
+    transition: transform 0.5s ease;
+    z-index: 2;
+}
+
+.door-container:hover .door {
+    transform: rotateY(45deg);
+}
+
+button:focus {
+    outline: none;
+}
+/* --------ドアのモーション-------- */

@@ -6,7 +6,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: rgba(18, 160, 220, 0.1);
   padding: 20px;* {
     margin: 0;
     padding: 0;
@@ -180,3 +180,23 @@ header img{
   height: auto;
   margin: 0;
 }
+
+/*--------詳細表示--------*/
+details {
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+}
+
+summary {
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
+details[open] summary {
+  margin-bottom: 0.5em;
+}
+/*--------詳細表示--------*/
