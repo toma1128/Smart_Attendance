@@ -6,7 +6,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: rgba(18, 160, 220, 0.1);
   padding: 20px;* {
     margin: 0;
     padding: 0;
@@ -188,7 +188,6 @@ details {
 }
 
 summary {
-  font-weight: bold;
   margin: -0.5em -0.5em 0;
   padding: 0.5em;
 }

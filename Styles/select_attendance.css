@@ -6,7 +6,7 @@
   
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f2f2f2;
+    background-color: rgba(18, 160, 220, 0.1);
     padding: 20px;
 }
 
@@ -187,24 +187,4 @@ header img {
 }
 
 /* --------ドアのモーション-------- */
-.door-wrap {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-}
-  
-.door, .door-back {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    transform: translate(-50%, -50%);
-}
-  
-.door {
-    z-index: 10;
-    transition: 3s;
-    transform: translate(-50%, -50%);
-    transform-origin: right;
-}
 /* --------ドアのモーション-------- */

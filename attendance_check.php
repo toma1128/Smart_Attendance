@@ -6,10 +6,10 @@
 session_start();
 
 // ログインしていない場合はログイン画面にリダイレクト
-// if (!isset($_SESSION['teacher_no'])) {
-//   header("Location: ./login.php");
-//   exit();
-// }
+if (!isset($_SESSION['teacher_no'])) {
+  header("Location: ./login.php");
+  exit();
+}
 
 //データベース接続定義
 $host = 'localhost';
@@ -119,7 +119,7 @@ $conn->close(); //接続切断
         <!-- メニュー -->
         <nav class="drawer-content">
           <ul class="drawer-list">
-            <li>
+            <li class="drawer-item">
               <a href="./select_attendance.php">出席確認</a>
             </li>
             <li class="drawer-item">
