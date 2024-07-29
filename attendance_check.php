@@ -24,70 +24,70 @@ try {
   //code...
 
   //出席データを取得
-$attend_sql = "SELECT DETAIL.STUDENT AS STUDENT, DETAIL.CAMERA AS CAMERA, DETAIL.CAMERA_TIME AS CTIME, DETAIL.QR AS QR, DETAIL.QR_TIME AS QTIME, STU.SNAME AS NAME, C.CNAME AS CLASS, SUB.SNAME AS SUBJECT, HEADER.LESSON_DATE AS DATE
-FROM ATTENDANCEDETAIL AS DETAIL LEFT JOIN STUDENT AS STU ON (DETAIL.STUDENT = STU.STUDENT_NO) 
-LEFT JOIN CLASS AS C ON (STU.CLASS = C.CLASS_NO) 
-LEFT JOIN ATTENDANCEHEADER AS HEADER ON (DETAIL.HEADER_NO = HEADER.HEADER_NO) 
-LEFT JOIN SUBJECT AS SUB ON (HEADER.SUBJECT = SUB.SUBJECT_NO)";
+  $attend_sql = "SELECT DETAIL.STUDENT AS STUDENT, DETAIL.CAMERA AS CAMERA, DETAIL.CAMERA_TIME AS CTIME, DETAIL.QR AS QR, DETAIL.QR_TIME AS QTIME, STU.SNAME AS NAME, C.CNAME AS CLASS, SUB.SNAME AS SUBJECT, HEADER.LESSON_DATE AS DATE
+  FROM ATTENDANCEDETAIL AS DETAIL LEFT JOIN STUDENT AS STU ON (DETAIL.STUDENT = STU.STUDENT_NO) 
+  LEFT JOIN CLASS AS C ON (STU.CLASS = C.CLASS_NO) 
+  LEFT JOIN ATTENDANCEHEADER AS HEADER ON (DETAIL.HEADER_NO = HEADER.HEADER_NO) 
+  LEFT JOIN SUBJECT AS SUB ON (HEADER.SUBJECT = SUB.SUBJECT_NO)";
 
-$where = " WHERE 1=1";
-$params = array();
+  $where = " WHERE 1=1";
+  $params = array();
 
-$order = " ORDER BY HEADER.LESSON_DATE, DETAIL.STUDENT";
+  $order = " ORDER BY HEADER.LESSON_DATE, DETAIL.STUDENT";
 
-// if (!empty($_POST['class'])) {
-//   $where .= " AND C.CLASS_NO = ?";
-//   $params[] = $_POST['class'];
-// }
-if (!empty($_POST['subject'])) {
-  $where .= " AND SUB.SUBJECT_NO = ?";
-  $params[] = $_POST['subject'];
-}
-if (!empty($_POST['date'])){
-  $where .= " AND HEADER.LESSON_DATE = ?";
-  $params[] = $_POST['date'];
-}
-
-$stmt = $conn->prepare($attend_sql . $where . $order);
-
-if (!empty($params)) {
-  if (!empty($_POST['date'])){
-    $types = str_repeat('i', count($params)-1);
-    $types .= "s";
-  }else {
-  $types = str_repeat('i', count($params));
+  if (!empty($_POST['class'])) {
+    $where .= " AND C.CLASS_NO = ?";
+    $params[] = $_POST['class'];
   }
-  $stmt->bind_param($types, ...$params);
-}
+  if (!empty($_POST['subject'])) {
+    $where .= " AND SUB.SUBJECT_NO = ?";
+    $params[] = $_POST['subject'];
+  }
+  if (!empty($_POST['date'])) {
+    $where .= " AND HEADER.LESSON_DATE = ?";
+    $params[] = $_POST['date'];
+  }
 
-$stmt->execute();
-$result = $stmt->get_result();
+  $stmt = $conn->prepare($attend_sql . $where . $order);
 
-//出欠区分を取得
-$getAttendSQL = "SELECT ANAME FROM ATTENDANCE";
-$getAttendStmt = $conn->prepare($getAttendSQL);
-$getAttendStmt->execute();
-$getAttendResult = $getAttendStmt->get_result();
-foreach ($getAttendResult as $row) {
-  $attendance[] = $row['ANAME'];
-}
+  if (!empty($params)) {
+    if (!empty($_POST['date'])) {
+      $types = str_repeat('i', count($params) - 1);
+      $types .= "s";
+    } else {
+      $types = str_repeat('i', count($params));
+    }
+    $stmt->bind_param($types, ...$params);
+  }
 
-//授業IDを取得
-$getSubject = "SELECT SUBJECT_NO, SNAME FROM SUBJECT";
-$getSubjectStmt = $conn->prepare($getSubject);
-$getSubjectStmt->execute();
-$getSubjectResult = $getSubjectStmt->get_result();
-while ($row = $getSubjectResult->fetch_assoc()) {
-  $subject[] = $row;
-}
+  $stmt->execute();
+  $result = $stmt->get_result();
 
-$getClass = "SELECT * FROM CLASS";
-$getclassStmt = $conn->prepare($getClass);
-$getclassStmt->execute();
-$getclassResult = $getclassStmt->get_result();
-while ($row = $getclassResult->fetch_assoc()) {
-  $class[] = $row;
-}
+  //出欠区分を取得
+  $getAttendSQL = "SELECT ANAME FROM ATTENDANCE";
+  $getAttendStmt = $conn->prepare($getAttendSQL);
+  $getAttendStmt->execute();
+  $getAttendResult = $getAttendStmt->get_result();
+  foreach ($getAttendResult as $row) {
+    $attendance[] = $row['ANAME'];
+  }
+
+  //授業IDを取得
+  $getSubject = "SELECT SUBJECT_NO, SNAME FROM SUBJECT";
+  $getSubjectStmt = $conn->prepare($getSubject);
+  $getSubjectStmt->execute();
+  $getSubjectResult = $getSubjectStmt->get_result();
+  while ($row = $getSubjectResult->fetch_assoc()) {
+    $subject[] = $row;
+  }
+
+  $getClass = "SELECT * FROM CLASS";
+  $getclassStmt = $conn->prepare($getClass);
+  $getclassStmt->execute();
+  $getclassResult = $getclassStmt->get_result();
+  while ($row = $getclassResult->fetch_assoc()) {
+    $class[] = $row;
+  }
 } catch (Exception $e) {
   echo $e;
 }
@@ -138,12 +138,12 @@ $conn->close(); //接続切断
   </header>
 
   <form action="./attendance_check.php" class="search-form" name="search" method="POST">
-    <!-- <select name="class" class="select">
+    <select name="class" class="select">
       <option value="">クラスを選択</option>
       <?php foreach ($class as $c): ?>
         <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
       <?php endforeach ?>
-    </select> -->
+    </select>
     <select name="subject" class="select">
       <option value="">授業を選択</option>
       <?php foreach ($subject as $s): ?>
@@ -175,7 +175,7 @@ $conn->close(); //接続切断
             <summary>
               <?php if ($r['CTIME'] != null && $r['QTIME'] != null) {
                 echo '出席';
-              }else {
+              } else {
                 echo '欠席';
               } ?>
             </summary>
