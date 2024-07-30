@@ -138,12 +138,6 @@ $conn->close(); //接続切断
   </header>
 
   <form action="./attendance_check.php" class="search-form" name="search" method="POST">
-    <select name="class" class="select">
-      <option value="">クラスを選択</option>
-      <?php foreach ($class as $c): ?>
-        <option value="<?= $c['CLASS_NO'] ?>"><?php echo $c['CNAME']; ?></option>
-      <?php endforeach ?>
-    </select>
     <select name="subject" class="select">
       <option value="">授業を選択</option>
       <?php foreach ($subject as $s): ?>
