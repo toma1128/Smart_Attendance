@@ -36,8 +36,6 @@ while ($row = $result->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>教室選択</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./JS/select_attendance.js"></script>
     <link rel="stylesheet" href="./Styles/select_attendance.css">
 </head>
 
@@ -65,23 +63,21 @@ while ($row = $result->fetch_assoc()) {
                 </ul>
             </nav>
         </div>
-        </div>
     </header>
     <main>
-        <form action="./attendance_check.php" method="POST">
-            <!-- このdoors-wrapper classをforeach文で回してほしい  -->
-            <?php foreach ($class as $c): ?>
-                <div class="doors-wrapper">
-                    <button type="submit" name="class" value="<?= htmlspecialchars($c['CLASS_NO'], ENT_QUOTES, 'UTF-8') ?>" class="door-container">
-                        <!--valueの場所にクラスIDを入れて欲しい-->
-                        <p><?= htmlspecialchars($c['CNAME'], ENT_QUOTES, 'UTF-8') ?></p> <!-- ここにクラス名を表示して欲しい -->
-                        <div class="door-bg"></div>
-                        <div class="door"></div>
-                    </button>
-                </div>
-            <?php endforeach ?>
-            <!-- end of foreach -->
-        </form>
+        <div class="doors-container">
+            <form action="./attendance_check.php" method="POST">
+                <?php foreach ($class as $c): ?>
+                    <div class="doors-wrapper">
+                        <button type="submit" name="class" value="<?= htmlspecialchars($c['CLASS_NO'], ENT_QUOTES, 'UTF-8') ?>" class="door-container">
+                            <p><?= htmlspecialchars($c['CNAME'], ENT_QUOTES, 'UTF-8') ?></p>
+                            <div class="door-bg"></div>
+                            <div class="door"></div>
+                        </button>
+                    </div>
+                <?php endforeach ?>
+            </form>
+        </div>
     </main>
 </body>
 

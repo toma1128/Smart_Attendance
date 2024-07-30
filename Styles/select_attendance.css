@@ -38,24 +38,15 @@ header img{
 
 main {
     width: 100%;
+    padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
+}
+
+form {
     display: flex;
     flex-wrap: wrap;
     gap: 70px;
     justify-content: flex-start;
-    align-items: flex-start;
-    /* flex-grow: 1; */
-    padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
 }
-
-/* form {
-    max-width: 400px;
-    width: 100%;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 30px auto;
-} */
 
 label {
     display: block;
