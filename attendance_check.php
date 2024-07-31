@@ -35,9 +35,13 @@ try {
 
   $order = " ORDER BY HEADER.LESSON_DATE, DETAIL.STUDENT";
 
-  if (!empty($_POST['class'])) {
+  if(!empty($_POST['class'])) {
+    $_SESSION['class'] = $_POST['class'];
+  }
+
+  if (!empty($_SESSION['class'])) {
     $where .= " AND C.CLASS_NO = ?";
-    $params[] = $_POST['class'];
+    $params[] = $_SESSION['class'];
   }
   if (!empty($_POST['subject'])) {
     $where .= " AND SUB.SUBJECT_NO = ?";

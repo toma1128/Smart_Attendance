@@ -176,6 +176,8 @@ header img {
 .door-container p {
     font-size: 20px;
     text-align: center;
+    color:  #484848;
+    font-family: Meiryo;
 }
 
 .door-bg {

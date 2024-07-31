@@ -12,8 +12,13 @@ if(!isset($_SESSION['teacher_no'])) {
   exit();
 }
 
+if(isset($_POST['subject']) && isset($_POST['class'])) {
+  $_SESSION['QR_subject'] = $_POST['subject'];
+  $_SESSION['QR_class'] = $_POST['class'];
+}
+
 // 教科・クラス未選択の場合
-if ($_POST['subject'] == null || $_POST['class'] == null) {
+if ($_SESSION['QR_subject'] == null || $_SESSION['QR_class'] == null) {
   // セッション変数でエラーメッセージ引渡
   $_SESSION['error'] = "教科・クラスの選択が完了していません。";
 
@@ -31,41 +36,40 @@ $password = 'test';
 $conn = new mysqli($host, $username, $password, $dbname);
 
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-//attendanceheaderのIDを取得
-$getID = "SELECT MAX(HEADER_NO) FROM ATTENDANCEHEADER;";
-$result = $conn->query($getID);
-$row = $result->fetch_row();
-$header_no = $row[0] + 1;
-$_SESSION['header_ID'] = $header_no;
+if($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['face_attend'])) {
+  //attendanceheaderのIDを取得
+  $getID = "SELECT MAX(HEADER_NO) FROM ATTENDANCEHEADER;";
+  $result = $conn->query($getID);
+  $row = $result->fetch_row();
+  $header_no = $row[0] + 1;
+  $_SESSION['header_ID'] = $header_no;
 
-//attendanceheaderに挿入
-$ins_header = "INSERT INTO ATTENDANCEHEADER VALUES (?, ?, ?, ?, NOW())";
-$stmt = $conn->prepare($ins_header);
-$stmt->bind_param('iiii', $header_no, $_POST['subject'], $_SESSION['teacher_no'], $_POST['class']);
-$stmt->execute();
+  //attendanceheaderに挿入
+  $ins_header = "INSERT INTO ATTENDANCEHEADER VALUES (?, ?, ?, ?, NOW())";
+  $stmt = $conn->prepare($ins_header);
+  $stmt->bind_param('iiii', $header_no, $_POST['subject'], $_SESSION['teacher_no'], $_POST['class']);
+  $stmt->execute();
 }
 $conn->close();
 
-$ch = curl_init();
-// リクエストURLを設定
-curl_setopt($ch, CURLOPT_URL, "http://100.78.13.89:5000/face_attend");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-curl_setopt($ch, CURLOPT_TIMEOUT, 150);
+if(isset($_POST['face_attend'])) {
+  $ch = curl_init();
+  // リクエストURLを設定
+  curl_setopt($ch, CURLOPT_URL, "http://100.78.13.89:5000/face_attend");
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 150);
 
-// リクエストを送信し、レスポンスを取得
-$response = curl_exec($ch);
+  // リクエストを送信し、レスポンスを取得
+  $response = curl_exec($ch);
 
-if(curl_errno($ch)) {
+  if(curl_errno($ch)) {
     echo 'Error:' . curl_error($ch);
+  }
+  echo "<script>alert('顔認証を開始します')</script>";
+  // cURLリソースを閉じる
+  curl_close($ch);
 }
-
-// cURLリソースを閉じる
-curl_close($ch);
-
-// echo $response;
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -104,8 +108,15 @@ curl_close($ch);
     </nav>
   </div>
 </header>
-    <div id="QRcode">
+  <main>
+    <div id="qr_container">
+      <div id="QRcode">
         <?php echo '<img src="create_QR.php" />'; ?>
+      </div>
+      <form action="./QRcode.php" method="POST">
+        <a href="./QRcode.php" name="face_attend" class="attend_btn">顔認証<i class="fas fa-angle-right fa-position-right"></i></a>
+      </form>
     </div>
+  </main>
 </body>
 </html>
