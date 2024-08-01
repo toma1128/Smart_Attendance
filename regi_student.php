@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_FILES['photo']['name'] = $student_no . '.jpg';
 
     if (empty($student_no) || empty($class_name) || empty($sname)) {
-        echo "すべての項目を入力してください。";
+        echo '<script>alert("すべての項目を入力してください。")</script>';
         exit;
     }
 
@@ -62,7 +62,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $check_stmt->close();
 
                 if($count > 0) {
-                    echo "この学籍番号は既に登録されています。";
+                    echo '<script>alert("この学籍番号は既に登録されています。")</script>';
                     exit;
                 }
 
@@ -71,10 +71,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ins_stu = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$destination')";
                 $stmt = $conn->prepare($ins_stu);
                 if($stmt->execute()){
-                    echo "生徒アカウントを作成しました。";
+                    echo '<script>alert("生徒アカウントを作成しました。")</script>';
                     $result = $stmt->get_result();
                 }else{
-                    echo "生徒アカウントの作成に失敗しました。" . $conn->error;
+                    echo '<script>alert("生徒アカウントの作成に失敗しました。")</script>';
                 }
             }else {
                 throw new Exception('ファイルの移動に失敗しました。');
@@ -88,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }else {
-        echo "アップロードされたファイルが見つからないか、読み取れません。";
+        echo '<script>alert("アップロードされたファイルが見つからないか、読み取れません。")</script>';
     }
 }
 $conn->close();
