@@ -64,9 +64,10 @@ if(isset($_POST['face_attend'])) {
   $response = curl_exec($ch);
 
   if(curl_errno($ch)) {
-    echo 'Error:' . curl_error($ch);
+    echo "<script>alert('エラー発生')</script>";
+  } else {
+    echo "<script>alert('正常終了')</script>";
   }
-  echo "<script>alert('顔認証を開始します')</script>";
   // cURLリソースを閉じる
   curl_close($ch);
 }
@@ -113,8 +114,9 @@ if(isset($_POST['face_attend'])) {
       <div id="QRcode">
         <?php echo '<img src="create_QR.php" />'; ?>
       </div>
-      <form action="./QRcode.php" method="POST">
-        <a href="./QRcode.php" name="face_attend" class="attend_btn">顔認証<i class="fas fa-angle-right fa-position-right"></i></a>
+      <form id="faceAttendForm" action="./QRcode.php" method="POST">
+        <input type="hidden" name="face_attend" value="1">
+        <a href="./QRcode.php" onclick="document.getElementById('faceAttendForm').submit(); return false;" class="attend_btn">顔認証</a>
       </form>
     </div>
   </main>

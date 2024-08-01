@@ -33,7 +33,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $student_no = $_POST['student_no'];
     $class_name = $_POST['class_name'];
     $sname = $_POST['sname'];
-    var_dump($_FILES['photo']);
     $photo = $_FILES['photo']['tmp_name'];
     $_FILES['photo']['name'] = $student_no . '.jpg';
 

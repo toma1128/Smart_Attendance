@@ -37,12 +37,10 @@ if(isset($_POST['data'])){
             $update = "UPDATE ATTENDANCEDETAIL SET CAMERA = 1, CAMERA_TIME = NOW() WHERE HEADER_NO = $header_no AND STUDENT = $data";
             $stmt = $conn->prepare($update);
             $stmt->execute();
-            $msg = "出席を更新しました。";
             }else{
             $insert = "INSERT INTO ATTENDANCEDETAIL VALUES ($header_no, $data, 1, NOW(), 2, NULL)";
             $stmt = $conn->prepare($insert);
             $stmt->execute();
-            $msg = "出席を登録しました。";
             }
         }
         $conn->close();
