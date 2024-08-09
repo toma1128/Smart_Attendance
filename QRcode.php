@@ -100,7 +100,7 @@ if(isset($_POST['face_attend'])) {
           <a href="./selectQR.php">QRコード選択</a>
         </li><!-- /.drawer-item -->
         <li class="drawer-item">
-          <a href="attendance_check.php">出席確認</a>
+          <a href="./select_attendance.php">出席確認</a>
         </li><!-- /.drawer-item -->
         <li class="drawer-item">
           <a href="./login.php" name="logout">ログアウト</a>

@@ -20,8 +20,12 @@ if(isset($data['data'])){
     $password = 'test';
 
     session_start();
-    $header_no = $_SESSION['header_ID'];
+    //$header_no = $_SESSION['header_ID'];
     $conn = new mysqli($host, $username, $password, $dbname);
+    $getHeaderID = "SELECT MAX(HEADER_NO) FROM ATTENDANCEHEADER;";
+    $result = $conn->query($getHeaderID);
+    $row = $result->fetch_row();
+    $header_no = $row[0];
 
     $student_no = json_decode($data['data'], true);
 
@@ -52,6 +56,6 @@ if(isset($data['data'])){
             $stmt->execute();
             }
         }
-        $conn->close();
     }
+    $conn->close();
 }
