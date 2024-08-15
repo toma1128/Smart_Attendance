@@ -7,7 +7,13 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
   background-color: rgba(18, 160, 220, 0.1);
-  padding: 20px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 header {
@@ -18,7 +24,6 @@ header {
   display: flex;
   align-items: center;
 }
-
 
 .header-title {
   text-align: center;
@@ -39,10 +44,6 @@ header img{
 
 .drawer {
   margin-left: auto; /* ハンバーガーメニューを右寄せ */
-  position: relative;
-}
-
-.drawer {
   position: relative;
   float: right;
 }
@@ -88,7 +89,7 @@ header img{
 .drawer-content {
   position: absolute;
   top: 40px;
-  right: 0;
+  right: 0;  /* メニューを右に配置 */
   background-color: #fff;
   width: 200px;
   border: 1px solid #ddd;
@@ -99,6 +100,8 @@ header img{
 
 .drawer-list {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .drawer-item {
@@ -124,97 +127,46 @@ header img{
   display: block;
 }
 
-main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  padding-top: 20px; /* ヘッダーとフォームの間にスペースを追加 */
+#qr_container {
+  position: relative;
+  width: fit-content;
+  margin: 20px;
 }
 
-h1 {
-  text-align: center;
-  color: rgb(18, 184, 240);
+#QRcode {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#QRcode img {
+  width: 580px;
+  height: 580px;
+  display: block;
 }
 
 form {
-  max-width: 600px;
-  width: 100%;
-  background-color: #fff;
-  padding: 60px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-size-adjust: 4em;
+  position: absolute;
+  bottom: 10px;
+  right: -100px;
 }
 
-label {
+a.attend_btn {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	margin: auto;
+  padding: 5px 20px 5px 20px;
+	font-weight: bold;
+	border-radius: 0.3rem;
+	border-bottom: 7px solid #0686b2;
+	background: rgb(18, 160, 220);
+	color: #fff;
+  transition: all 0.3s;
 }
-
-input[type="text"],
-input[type="file"],
-select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
-}
-
-input[type="file"] {
-  padding: 5px;
-}
-
-#button {
-  text-align: center;
-}
-
-button {
-  background-color: rgb(18, 184, 240);
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: rgb(18, 160, 220);
-}
-
-select {
-  width: flex;
-  max-height: 150px;
-  overflow-y: auto;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right 10px center;
-  background-color: white;
-  padding-right: 30px;
-}
-
-option {
-  width: 600px;
-}
-
-select::-webkit-scrollbar {
-  width: 10px;
-}
-
-select::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-select::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-select::-webkit-scrollbar-thumb:hover {
-  background: #555;
+a.attend_btn:hover {
+	margin-top: 6px;
+	border-bottom: 1px solid #0686b2;
+	color: #fff;
 }

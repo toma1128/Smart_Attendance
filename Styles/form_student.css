@@ -1,35 +1,137 @@
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f5f3f3;
-  padding: 15px;
-}
-
-form{
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  max-width: 400px;
-  margin:0 auto;
-}
-
-button{
-  text-align: center;
-  color: white;
-  background-color: rgb(51, 0, 255);
-  font-weight: bold;
-}
-
-input{
-  width: 100%;
-  padding:10px;
-  border: 1px solid rgb(1, 1, 16);
+/* 全体のスタイル */
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: rgba(18, 160, 220, 0.1);
+  display: flex;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ヘッダースタイル */
+header {
+  margin-top:20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+header img {
+  max-width: 200px;
+  max-height: 70px;
+  width: auto;
+  height: auto;
+}
+
+.header-content {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 1em;
+  color: rgb(18, 160, 220);
+}
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+form h1 {
+  color: rgb(18, 184, 240);
+  text-align: center;
   margin-bottom: 20px;
 }
 
-label{
+
+form {
+  width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
   display: block;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   font-weight: bold;
 }
 
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  background-color: rgb(18, 184, 240);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: rgb(16, 156, 204);
+}
+
+/* レスポンシブデザイン */
+@media screen and (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  form {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  input, button {
+    font-size: 14px;
+  }
+
+  /* Styles for iPad and similar tablet devices */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    max-width: 90%;
+  }
+  
+  input[type="text"], 
+  textarea {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
+}
