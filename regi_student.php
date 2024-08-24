@@ -34,14 +34,34 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $class_name = $_POST['class_name'];
     $sname = $_POST['sname'];
     $photo = $_FILES['photo']['tmp_name'];
-    $_FILES['photo']['name'] = $student_no . '.jpg';
 
     if (empty($student_no) || empty($class_name) || empty($sname)) {
         echo '<script>alert("すべての項目を入力してください。")</script>';
         exit;
     }
 
-    $photo_name = $_FILES['photo']['name'];
+    $photo = $_FILES['photo'];
+    if (!isset($photo['name']) || !is_string($photo['name'])) {
+        echo '<script>alert("ファイルのアップロードに問題がありました。")</script>';
+        exit;
+    }
+    
+    $file_extension = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
+
+    // 許可する拡張子
+    $allowed_extensions = ['jpg', 'jpeg', 'png'];
+    $file_extension = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
+
+    // ファイルが画像かどうかをチェック
+    if (!in_array($file_extension, $allowed_extensions) || !getimagesize($photo['tmp_name'])) {
+        echo '<script>
+        alert("アップロードできるのは画像ファイル（jpg, jpeg, png）のみです。");
+        window.location.href = "./regi_student.php";
+        </script>';
+        exit;
+    }
+
+    $photo_name = $student_no . '.' . $file_extension;
     $uploadDirectory = './.face_images/';
 
     // ディレクトリが存在しない場合は作成
@@ -50,9 +70,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // ファイルを移動
     $destination = $uploadDirectory . $photo_name;
-    if(is_uploaded_file($photo) && is_readable($photo)) {
+    if(is_uploaded_file($photo['tmp_name']) && is_readable($photo['tmp_name'])) {
         try{
-            if(move_uploaded_file($photo, $destination)) {
+            if(move_uploaded_file($photo['tmp_name'], $destination)) {
                 // 学生番号の重複チェック
                 $check_stmt = $conn->prepare("SELECT COUNT(*) FROM STUDENT WHERE STUDENT_NO = ?");
                 $check_stmt->bind_param("s", $student_no);
