@@ -3,6 +3,7 @@
  * 生徒登録
  * @author Toma
  */
+require '../.config/forwarding_address.php';
 session_start();
 date_default_timezone_set('Asia/Tokyo');
 
@@ -30,45 +31,84 @@ while ($row = $result->fetch_assoc()) {
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $student_no = $_POST['student_no'];
     $class_name = $_POST['class_name'];
     $sname = $_POST['sname'];
     $photo = $_FILES['photo']['tmp_name'];
-    $_FILES['photo']['name'] = $student_no . '.jpg';
 
-    if (empty($student_no) || empty($class_name) || empty($sname)) {
-        echo '<script>alert("すべての項目を入力してください。")</script>';
+    if (!(preg_match('/^\d{7}$/', $student_no))) {
+        // 有効な7桁の数字の場合の処理
+        echo '<script>
+        alert("学籍番号は7桁の数字で入力してください。");
+        window.location.href = "./regi_student.php";
+        </script>';
         exit;
     }
 
-    $photo_name = $_FILES['photo']['name'];
-    $uploadDirectory = './.face_images/';
-
-    // ディレクトリが存在しない場合は作成
-    if (!file_exists($uploadDirectory)) {
-        mkdir($uploadDirectory, 0777, true);
+    if (empty($student_no) || empty($class_name) || empty($sname)) {
+        echo '<script>alert("すべての項目を入力してください。");
+        window.location.href = "./regi_student.php";
+        </script>';
+        exit;
     }
-    // ファイルを移動
-    $destination = $uploadDirectory . $photo_name;
-    if(is_uploaded_file($photo) && is_readable($photo)) {
+
+    $photo = $_FILES['photo'];
+    if (!isset($photo['name']) || !is_string($photo['name'])) {
+        echo '<script>
+        alert("ファイルのアップロードに問題がありました。");
+        window.location.href = "./regi_student.php";
+        </script>';
+        exit;
+    }
+    
+    $file_extension = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
+
+    // 許可する拡張子
+    $allowed_extensions = ['jpg', 'jpeg', 'png'];
+    $file_extension = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
+
+    // ファイルが画像かどうかをチェック
+    if (!in_array($file_extension, $allowed_extensions) || !getimagesize($photo['tmp_name'])) {
+        echo '<script>
+        alert("アップロードできるのは画像ファイル（jpg, jpeg, png）のみです。");
+        window.location.href = "./regi_student.php";
+        </script>';
+        exit;
+    }
+
+    $photo_name = $student_no . '.' . $file_extension;
+    $ftp_connect = ftp_connect($ftp_server_address, 21);
+
+    if(@ftp_login($ftp_connect, $ftp_username, $ftp_password)) {
+        ftp_pasv($ftp_connect, true);
+        $destination = $photo_name;
+    }else{
+        echo '<script>
+        alert("FTP接続に失敗しました。");
+        window.location.href = "./regi_student.php";
+        </script>';
+        exit;
+    }
+    
+    if(is_uploaded_file($photo['tmp_name']) && is_readable($photo['tmp_name'])) {
         try{
-            if(move_uploaded_file($photo, $destination)) {
-                // 学生番号の重複チェック
-                $check_stmt = $conn->prepare("SELECT COUNT(*) FROM STUDENT WHERE STUDENT_NO = ?");
-                $check_stmt->bind_param("s", $student_no);
-                $check_stmt->execute();
-                $check_stmt->bind_result($count);
-                $check_stmt->fetch();
-                $check_stmt->close();
+            // 学生番号の重複チェック
+            $check_stmt = $conn->prepare("SELECT COUNT(*) FROM STUDENT WHERE STUDENT_NO = ?");
+            $check_stmt->bind_param("s", $student_no);
+            $check_stmt->execute();
+            $check_stmt->bind_result($count);
+            $check_stmt->fetch();
+            $check_stmt->close();
 
-                if($count > 0) {
-                    echo '<script>alert("この学籍番号は既に登録されています。")</script>';
-                    exit;
-                }
-
-        
+            if($count > 0) {
+                echo '<script>alert("この学籍番号は既に登録されています。")</script>';
+                exit;
+            }
+            //if(move_uploaded_file($photo['tmp_name'], $destination)) {
+            if(ftp_put($ftp_connect, $face_send_pass.$photo_name, $photo['tmp_name'], FTP_BINARY)) {
                 // データベースに接続
-                $ins_stu = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$destination')";
+                $ins_stu = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$face_send_pass')";
                 $stmt = $conn->prepare($ins_stu);
                 if($stmt->execute()){
                     echo '<script>alert("生徒アカウントを作成しました。")</script>';

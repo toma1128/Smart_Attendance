@@ -3,6 +3,7 @@
  * QRコード表示画面
  * @author Toma
  */
+require '../.config/forwarding_address.php';
 session_start();
 date_default_timezone_set('Asia/Tokyo');
 
@@ -55,7 +56,7 @@ $conn->close();
 if(isset($_POST['face_attend'])) {
   $ch = curl_init();
   // リクエストURLを設定
-  curl_setopt($ch, CURLOPT_URL, "http://100.78.13.89:5000/face_attend");
+  curl_setopt($ch, CURLOPT_URL, $camera_address);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
   curl_setopt($ch, CURLOPT_TIMEOUT, 150);

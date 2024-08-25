@@ -3,6 +3,7 @@
  * QRコード生成
  * @author Toma
  */
+require './.config/forwarding_address.php';
 session_start();
 $header_ID = $_SESSION['header_ID'];
 
@@ -13,8 +14,7 @@ require_once "phpqrcode/qrlib.php";
 $filepath = './qrcode/qr.png';
 
 // QRコードの内容
-$contents = "https://yu-windows.tail62876.ts.net/B/form_student.php?id=$header_ID";
-
+$contents = $QR_form_address.$header_ID;
 // QRコード画像を出力
 QRcode::png($contents, $filepath, QR_ECLEVEL_M, 6);
 

@@ -45,15 +45,15 @@ if(isset($data['data'])){
             $result2 = $stmt2->get_result();
 
             if($result2->num_rows > 0) {
-            $update = "UPDATE ATTENDANCEDETAIL SET CAMERA = 1, CAMERA_TIME = NOW() WHERE HEADER_NO = ? AND STUDENT = ?";
-            $stmt = $conn->prepare($update);
-            $stmt->bind_param("is", $header_no, $data);
-            $stmt->execute();
+                $update = "UPDATE ATTENDANCEDETAIL SET CAMERA = 1, CAMERA_TIME = NOW() WHERE HEADER_NO = ? AND STUDENT = ?";
+                $stmt = $conn->prepare($update);
+                $stmt->bind_param("is", $header_no, $data);
+                $stmt->execute();
             }else{
-            $insert = "INSERT INTO ATTENDANCEDETAIL VALUES (?, ?, 1, NOW(), 2, NULL)";
-            $stmt = $conn->prepare($insert);
-            $stmt->bind_param("is", $header_no, $data);
-            $stmt->execute();
+                $insert = "INSERT INTO ATTENDANCEDETAIL VALUES (?, ?, 1, NOW(), 2, NULL)";
+                $stmt = $conn->prepare($insert);
+                $stmt->bind_param("is", $header_no, $data);
+                $stmt->execute();
             }
         }
     }
