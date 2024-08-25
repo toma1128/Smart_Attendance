@@ -3,6 +3,7 @@
  * 生徒登録
  * @author Toma
  */
+require '../.config/forwarding_address.php';
 session_start();
 date_default_timezone_set('Asia/Tokyo');
 
@@ -30,19 +31,34 @@ while ($row = $result->fetch_assoc()) {
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $student_no = $_POST['student_no'];
     $class_name = $_POST['class_name'];
     $sname = $_POST['sname'];
     $photo = $_FILES['photo']['tmp_name'];
 
+    if (!(preg_match('/^\d{7}$/', $student_no))) {
+        // 有効な7桁の数字の場合の処理
+        echo '<script>
+        alert("学籍番号は7桁の数字で入力してください。");
+        window.location.href = "./regi_student.php";
+        </script>';
+        exit;
+    }
+
     if (empty($student_no) || empty($class_name) || empty($sname)) {
-        echo '<script>alert("すべての項目を入力してください。")</script>';
+        echo '<script>alert("すべての項目を入力してください。");
+        window.location.href = "./regi_student.php";
+        </script>';
         exit;
     }
 
     $photo = $_FILES['photo'];
     if (!isset($photo['name']) || !is_string($photo['name'])) {
-        echo '<script>alert("ファイルのアップロードに問題がありました。")</script>';
+        echo '<script>
+        alert("ファイルのアップロードに問題がありました。");
+        window.location.href = "./regi_student.php";
+        </script>';
         exit;
     }
     
@@ -62,17 +78,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $photo_name = $student_no . '.' . $file_extension;
-    $uploadDirectory = './.face_images/';
+    //$uploadDirectory = '../.face_images/';
 
     // ディレクトリが存在しない場合は作成
     if (!file_exists($uploadDirectory)) {
         mkdir($uploadDirectory, 0777, true);
     }
     // ファイルを移動
-    $destination = $uploadDirectory . $photo_name;
+    //$destination = $uploadDirectory . $photo_name;
+
+    //画像をサーバーに転送 
+    exec("scp -i $key_pass {$photo['tmp_name']} $face_send_pass");
+    
     if(is_uploaded_file($photo['tmp_name']) && is_readable($photo['tmp_name'])) {
         try{
-            if(move_uploaded_file($photo['tmp_name'], $destination)) {
+            //if(move_uploaded_file($photo['tmp_name'], $destination)) {
+            if(exec("scp {$photo['tmp_name']} $test_remote_server")){
                 // 学生番号の重複チェック
                 $check_stmt = $conn->prepare("SELECT COUNT(*) FROM STUDENT WHERE STUDENT_NO = ?");
                 $check_stmt->bind_param("s", $student_no);
