@@ -78,38 +78,37 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $photo_name = $student_no . '.' . $file_extension;
-    //$uploadDirectory = '../.face_images/';
+    $ftp_connect = ftp_connect($ftp_server_address, 21);
 
-    // ディレクトリが存在しない場合は作成
-    if (!file_exists($uploadDirectory)) {
-        mkdir($uploadDirectory, 0777, true);
+    if(@ftp_login($ftp_connect, $ftp_username, $ftp_password)) {
+        ftp_pasv($ftp_connect, true);
+        $destination = $photo_name;
+    }else{
+        echo '<script>
+        alert("FTP接続に失敗しました。");
+        window.location.href = "./regi_student.php";
+        </script>';
+        exit;
     }
-    // ファイルを移動
-    //$destination = $uploadDirectory . $photo_name;
-
-    //画像をサーバーに転送 
-    exec("scp -i $key_pass {$photo['tmp_name']} $face_send_pass");
     
     if(is_uploaded_file($photo['tmp_name']) && is_readable($photo['tmp_name'])) {
         try{
+            // 学生番号の重複チェック
+            $check_stmt = $conn->prepare("SELECT COUNT(*) FROM STUDENT WHERE STUDENT_NO = ?");
+            $check_stmt->bind_param("s", $student_no);
+            $check_stmt->execute();
+            $check_stmt->bind_result($count);
+            $check_stmt->fetch();
+            $check_stmt->close();
+
+            if($count > 0) {
+                echo '<script>alert("この学籍番号は既に登録されています。")</script>';
+                exit;
+            }
             //if(move_uploaded_file($photo['tmp_name'], $destination)) {
-            if(exec("scp {$photo['tmp_name']} $test_remote_server")){
-                // 学生番号の重複チェック
-                $check_stmt = $conn->prepare("SELECT COUNT(*) FROM STUDENT WHERE STUDENT_NO = ?");
-                $check_stmt->bind_param("s", $student_no);
-                $check_stmt->execute();
-                $check_stmt->bind_result($count);
-                $check_stmt->fetch();
-                $check_stmt->close();
-
-                if($count > 0) {
-                    echo '<script>alert("この学籍番号は既に登録されています。")</script>';
-                    exit;
-                }
-
-        
+            if(ftp_put($ftp_connect, $face_send_pass.$photo_name, $photo['tmp_name'], FTP_BINARY)) {
                 // データベースに接続
-                $ins_stu = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$destination')";
+                $ins_stu = "INSERT INTO STUDENT (STUDENT_NO, CLASS, SNAME, FACE_IMAGE) VALUES ('$student_no', '$class_name', '$sname', '$face_send_pass')";
                 $stmt = $conn->prepare($ins_stu);
                 if($stmt->execute()){
                     echo '<script>alert("生徒アカウントを作成しました。")</script>';
